@@ -1,7 +1,4 @@
-import {
-  collection,
-  getDocs,
-} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../Firebase/Firebase";
 import { iTodo } from "./TODOInterfaces";
@@ -42,11 +39,12 @@ export default function TODO() {
     id,
     setId,
   };
- 
+
   return (
-    <div className="flex flex-col sm:flex-row">
+    <div className="flex flex-col m-5 sm:flex-row">
+      <div>v.0.5</div>
       <TODOMenu todoPropsPackage={todoPropsPackage} />
-     <TODOList todoPropsPackage={todoPropsPackage}/>
+      <TODOList todoPropsPackage={todoPropsPackage} />
     </div>
   );
 }

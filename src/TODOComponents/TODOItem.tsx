@@ -2,16 +2,18 @@ import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "../Firebase/Firebase";
 import { iTodo, iTodoPropsPackage } from "./TODOInterfaces";
-import TODOchangeName from "./TODOchangeName";
-import TODOchangeTaks from "./TODOchangeTask";
+import TODOName from "./TODOName Components/TODOName";
+import TODOTask from "./TODOTask";
+
+
 
 export default function TODOItem(props: {
   data: iTodo;
   todoPropsPackage: iTodoPropsPackage;
 }) {
 
-  const [isEditName, setIsEditName] = useState<boolean>(false);
   const [isEditTask, setIsEditTask] = useState<boolean>(false);
+  const [isEditName, setIsEditName] = useState<boolean>(false);
 
   const handleEditTask = async (newTask: string) => {
     const temp = props.todoPropsPackage.todo.map((item) => {
@@ -77,42 +79,22 @@ export default function TODOItem(props: {
       ...props.data,
     });
     console.log(props.data.id, " => priority has changed");
-
   };
+
+  const editNamePropsPackage = {
+    name:props.data.name,handleEditName, isEditName, setIsEditName
+  } 
+
+  const editTaskPropsPackage = {
+    task:props.data.task, handleEditTask, isEditTask, setIsEditTask
+  }
 
   return (
     <>
       <div className="flex justify-between mx-2 text-white font-extrabold bg-blue-400 border border-blue-700 rounded-xl px-5 py-2 my-2 shadow-2xl">
-        {!isEditName ? (
-          <span
-            className="min-w-[25%]"
-            data-testid="nameSpan"
-            onClick={() => setIsEditName(!isEditName)}
-          >
-            {props.data.name}
-          </span>
-        ) : (
-          <TODOchangeName
-            name={props.data.name}
-            setIsEditName={setIsEditName}
-            handleRenameName={handleEditName}
-          />
-        )}
-        {!isEditTask ? (
-          <span
-            className="min-w-[25%] "
-            data-testid="taskSpan"
-            onClick={() => setIsEditTask(!isEditTask)}
-          >
-            {props.data.task}
-          </span>
-        ) : (
-          <TODOchangeTaks
-            task={props.data.task}
-            setIsEditTask={setIsEditTask}
-            handleRenameTask={handleEditTask}
-          />
-        )}
+        <TODOName editNamePropsPackage={editNamePropsPackage}  />
+        <TODOTask editTaskPropsPackage={editTaskPropsPackage}/>
+        
         <span
           data-testid="prioritySpan"
           className="cursor-pointer min-w-[25%] flex justify-center"

@@ -19,3 +19,17 @@ export interface iTodo {
     id: number;
     setId: React.Dispatch<React.SetStateAction<number>>;
   }
+
+  export interface iEditNamePropsPackage{
+    name:string,
+    handleEditName:(newName: string) => Promise<void>
+    isEditName:boolean,
+    setIsEditName:React.Dispatch<React.SetStateAction<boolean>>
+  }
+
+  export interface iEditTaskPropsPackage{
+    task:string,
+    handleEditTask: (newTask: string) => Promise<void>
+    isEditTask:boolean,
+    setIsEditTask: React.Dispatch<React.SetStateAction<boolean>>
+  }
