@@ -1,28 +1,12 @@
-import { useState } from "react";
-import TODOItem from "./TODOItem";
+import {
+  collection,
+  getDocs,
+} from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { db } from "../Firebase/Firebase";
+import { iTodo } from "./TODOInterfaces";
+import TODOList from "./TODOList";
 import TODOMenu from "./TODOMenu";
-
-export interface iTodo {
-  name: string;
-  task: string;
-  priority: "Urgent" | "Normal" | "Low";
-  id: number;
-}
-
-export interface iTodoPropsPackage {
-  name: string;
-  setName: React.Dispatch<React.SetStateAction<string>>;
-  task: string;
-  setTask: React.Dispatch<React.SetStateAction<string>>;
-  priority: "Urgent" | "Normal" | "Low";
-  setPriority: React.Dispatch<
-    React.SetStateAction<"Urgent" | "Normal" | "Low">
-  >;
-  todo: iTodo[];
-  setTodo: React.Dispatch<React.SetStateAction<iTodo[]>>;
-  id: number;
-  setId: React.Dispatch<React.SetStateAction<number>>;
-}
 
 export default function TODO() {
   const [name, setName] = useState("");
@@ -30,8 +14,21 @@ export default function TODO() {
   const [id, setId] = useState<number>(Date.now());
   const [priority, setPriority] = useState<"Urgent" | "Normal" | "Low">(
     "Normal"
-    );
-    const [todo, setTodo] = useState<iTodo[]>([]);
+  );
+  const [todo, setTodo] = useState<iTodo[]>([]);
+
+  useEffect(() => {
+    const tempTodoArray: iTodo[] = [];
+    async function getTodosFromFirestoreAtFirstRender() {
+      const docSnap = await getDocs(collection(db, "users"));
+      docSnap.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        tempTodoArray.push(doc.data() as iTodo);
+      });
+      setTodo(tempTodoArray);
+    }
+    getTodosFromFirestoreAtFirstRender();
+  }, []);
 
   const todoPropsPackage = {
     name,
@@ -45,22 +42,11 @@ export default function TODO() {
     id,
     setId,
   };
-  const todoList = todo.map((item, i) => {
-    return <TODOItem data={item} key={i} todoPropsPackage={todoPropsPackage} />;
-  });
-
+ 
   return (
     <div className="flex flex-col sm:flex-row">
       <TODOMenu todoPropsPackage={todoPropsPackage} />
-      <title className="flex flex-col w-full">
-        <div className=" flex justify-between mx-5">
-          <span>name</span>
-          <span>task</span>
-          <span>priority</span>
-          <span>options</span>
-        </div>
-        <div>{todoList}</div>
-      </title>
+     <TODOList todoPropsPackage={todoPropsPackage}/>
     </div>
   );
 }

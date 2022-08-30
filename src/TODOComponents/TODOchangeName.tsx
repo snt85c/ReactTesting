@@ -8,7 +8,7 @@ export default function TODOchangeName(props: {
 }) {
   let { ref } = HandleClickOutsideComponent(props.setIsEditName);
   const [newName, setNewName] = useState<string>(props.name);
-
+  
   return (
     <div ref={ref}>
       <input
@@ -19,7 +19,11 @@ export default function TODOchangeName(props: {
           setNewName(e.target.value);
         }}
       ></input>
-      <button onClick={() => props.handleRenameName(newName)}>change</button>
+      <button
+        onClick={() => props.handleRenameName(newName)}
+      >
+        change
+      </button>
     </div>
   );
 }
