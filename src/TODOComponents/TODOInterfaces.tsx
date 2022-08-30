@@ -33,3 +33,10 @@ export interface iTodo {
     isEditTask:boolean,
     setIsEditTask: React.Dispatch<React.SetStateAction<boolean>>
   }
+
+  export interface iCalendarPropsPackage{
+    value: Date;
+    onChange: React.Dispatch<React.SetStateAction<Date>>;
+    isCalendarOpen: boolean;
+    setIsCalendarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  }

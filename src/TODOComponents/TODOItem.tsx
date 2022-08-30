@@ -4,6 +4,9 @@ import { db } from "../Firebase/Firebase";
 import { iTodo, iTodoPropsPackage } from "./TODOInterfaces";
 import TODOName from "./TODOName Components/TODOName";
 import TODOTask from "./TODOTask";
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import TODOcalendar from "./TODOCalendar";
 
 
 
@@ -14,6 +17,8 @@ export default function TODOItem(props: {
 
   const [isEditTask, setIsEditTask] = useState<boolean>(false);
   const [isEditName, setIsEditName] = useState<boolean>(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false)
+  const [date, setDate] = useState(new Date());
 
   const handleEditTask = async (newTask: string) => {
     const temp = props.todoPropsPackage.todo.map((item) => {
@@ -89,12 +94,19 @@ export default function TODOItem(props: {
     task:props.data.task, handleEditTask, isEditTask, setIsEditTask
   }
 
+  const calendarPropsPackage ={
+    value:date,
+    onChange: setDate,
+    isCalendarOpen,
+    setIsCalendarOpen
+  }
+
   return (
     <>
       <div className="flex justify-between mx-2 text-white font-extrabold bg-blue-400 border border-blue-700 rounded-xl px-5 py-2 my-2 shadow-2xl">
         <TODOName editNamePropsPackage={editNamePropsPackage}  />
-        <TODOTask editTaskPropsPackage={editTaskPropsPackage}/>
-        
+        {/* <TODOTask editTaskPropsPackage={editTaskPropsPackage}/> */}
+        <TODOcalendar calendarPropsPackage={calendarPropsPackage}/>
         <span
           data-testid="prioritySpan"
           className="cursor-pointer min-w-[25%] flex justify-center"
