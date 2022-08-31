@@ -1,8 +1,8 @@
 import { Calendar } from "react-calendar";
-import { HandleClickOutsideComponent } from "../HandleClickOutsideComponent";
-import { iCalendarPropsPackage } from "./TODOInterfaces";
+import { HandleClickOutsideComponent } from "../../HandleClickOutsideComponent";
+import { iCalendarPropsPackage } from "../TODOInterfaces";
 
-export default function TODOcalendar(props: {
+export default function TODOChangeCalendar(props: {
   calendarPropsPackage: iCalendarPropsPackage;
 }) {
   const { ref } = HandleClickOutsideComponent(
@@ -14,7 +14,7 @@ export default function TODOcalendar(props: {
       {props.calendarPropsPackage.isCalendarOpen && (
         <div
           ref={ref}
-          className="flex flex-col absolute top-auto text-black bg-slate-100 shadow-xl rounded-"
+          className="flex flex-col absolute top-auto text-black"
         >
           <Calendar
             className=""
@@ -23,7 +23,7 @@ export default function TODOcalendar(props: {
           />
           <button
             className=" text-black"
-            onClick={() => props.calendarPropsPackage.handleEditCalendar()}
+            onClick={() => props.calendarPropsPackage.handleEditCalendar()  }
           >
             confirm
           </button>

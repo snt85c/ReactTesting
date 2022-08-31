@@ -3,6 +3,7 @@ import TODOTogglePriority from "./TODOTogglePriority";
 import { doc, setDoc, } from "firebase/firestore";
 import { db } from "../Firebase/Firebase";
 import { Calendar } from "react-calendar";
+import TODOMenuCalendar from "./TODOCalendarComponents / TODOMenuCalendar";
 
 export default function TODOMenu(props: {
   todoPropsPackage: iTodoPropsPackage;
@@ -37,9 +38,7 @@ export default function TODOMenu(props: {
             props.todoPropsPackage.setTask(e.target.value);
           }}
         ></input> */}
-        <div className="flex flex-col">
-        <Calendar value={props.todoPropsPackage.date} onChange={props.todoPropsPackage.setDate} />
-        </div>
+        <TODOMenuCalendar todoPropsPackage={props.todoPropsPackage}/>
         <TODOTogglePriority
           priority={props.todoPropsPackage.priority}
           setPriority={props.todoPropsPackage.setPriority}
