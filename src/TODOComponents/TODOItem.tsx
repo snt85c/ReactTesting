@@ -4,7 +4,6 @@ import { db } from "../Firebase/Firebase";
 import { iTodo, iTodoPropsPackage } from "./TODOInterfaces";
 import TODOName from "./TODOName Components/TODOName";
 import TODOTask from "./TODOTask";
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import TODOcalendar from "./TODOCalendar";
 
@@ -18,24 +17,33 @@ export default function TODOItem(props: {
   const [isEditTask, setIsEditTask] = useState<boolean>(false);
   const [isEditName, setIsEditName] = useState<boolean>(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false)
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(props.todoPropsPackage.date);
 
-  const handleEditTask = async (newTask: string) => {
-    const temp = props.todoPropsPackage.todo.map((item) => {
-      if (item.id === props.data.id) {
-        props.data.task = newTask ? newTask : "empty";
-        return item;
-      }
-      return item;
-    });
-    props.todoPropsPackage.setTodo(temp);
+  // const handleEditTask = async (newTask: string) => {
+  //   const temp = props.todoPropsPackage.todo.map((item) => {
+  //     if (item.id === props.data.id) {
+  //       props.data.task = newTask ? newTask : "empty";
+  //       return item;
+  //     }
+  //     return item;
+  //   });
+  //   props.todoPropsPackage.setTodo(temp);
+  //   await updateDoc(doc(db, "users", props.data.id.toString()), {
+  //     ...props.data,
+  //     task: newTask ? newTask : "empty",
+  //   });
+  //   console.log(props.data.id, " => task has changed");
+  //   setIsEditTask(false);
+  // };
+
+  const handleEditCalendar = async ()=>{
     await updateDoc(doc(db, "users", props.data.id.toString()), {
-      ...props.data,
-      task: newTask ? newTask : "empty",
-    });
-    console.log(props.data.id, " => task has changed");
-    setIsEditTask(false);
-  };
+          ...props.data,
+          date: date,
+        });
+        console.log(props.data.id, " => date has changed");
+        setIsCalendarOpen(false);
+  }
 
   const handleEditName = async (newName: string) => {
     const temp = props.todoPropsPackage.todo.map((item) => {
@@ -90,15 +98,16 @@ export default function TODOItem(props: {
     name:props.data.name,handleEditName, isEditName, setIsEditName
   } 
 
-  const editTaskPropsPackage = {
-    task:props.data.task, handleEditTask, isEditTask, setIsEditTask
-  }
+  // const editTaskPropsPackage = {
+  //   task:props.data.task, handleEditTask, isEditTask, setIsEditTask
+  // }
 
   const calendarPropsPackage ={
     value:date,
     onChange: setDate,
     isCalendarOpen,
-    setIsCalendarOpen
+    setIsCalendarOpen,
+    handleEditCalendar
   }
 
   return (

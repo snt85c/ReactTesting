@@ -2,6 +2,7 @@ import { iTodo, iTodoPropsPackage } from "./TODOInterfaces";
 import TODOTogglePriority from "./TODOTogglePriority";
 import { doc, setDoc, } from "firebase/firestore";
 import { db } from "../Firebase/Firebase";
+import { Calendar } from "react-calendar";
 
 export default function TODOMenu(props: {
   todoPropsPackage: iTodoPropsPackage;
@@ -27,15 +28,18 @@ export default function TODOMenu(props: {
             props.todoPropsPackage.setName(e.target.value);
           }}
         ></input>
-        <input
+        {/* <input
           type="text"
           placeholder="task"
           className="mx-2 px-2 border border-gray-400 rounded-xl"
-          defaultValue={props.todoPropsPackage.task}
+          defaultValue={pops.todoPropsPackage.task}
           onChange={(e) => {
             props.todoPropsPackage.setTask(e.target.value);
           }}
-        ></input>
+        ></input> */}
+        <div className="flex flex-col">
+        <Calendar value={props.todoPropsPackage.date} onChange={props.todoPropsPackage.setDate} />
+        </div>
         <TODOTogglePriority
           priority={props.todoPropsPackage.priority}
           setPriority={props.todoPropsPackage.setPriority}
@@ -43,13 +47,13 @@ export default function TODOMenu(props: {
         <button
           className="px-5 py-2 bg-blue-700 border border-blue-400 rounded-xl font-extrabold text-white "
           disabled={
-            props.todoPropsPackage.name && props.todoPropsPackage.task
+            props.todoPropsPackage.name 
               ? false
               : true
           }
           style={{
             opacity:
-              props.todoPropsPackage.name && props.todoPropsPackage.task
+              props.todoPropsPackage.name 
                 ? 1
                 : 0.5,
           }}
@@ -59,7 +63,7 @@ export default function TODOMenu(props: {
             props.todoPropsPackage.setId(Date.now());
             let todoObject: iTodo = {
               name: props.todoPropsPackage.name,
-              task: props.todoPropsPackage.task,
+              date: props.todoPropsPackage.date,
               priority: props.todoPropsPackage.priority,
               id: props.todoPropsPackage.id,
             };

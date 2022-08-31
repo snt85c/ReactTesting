@@ -11,7 +11,7 @@ export default function TODOList(props:{todoPropsPackage:iTodoPropsPackage}){
         <title className="flex flex-col w-full">
         <div className=" flex justify-between mx-5">
           <span>name</span>
-          <span>task</span>
+          <span>date</span>
           <span>priority</span>
           <span>options</span>
         </div>

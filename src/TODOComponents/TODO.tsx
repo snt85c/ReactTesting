@@ -8,6 +8,7 @@ import TODOMenu from "./TODOMenu";
 export default function TODO() {
   const [name, setName] = useState("");
   const [task, setTask] = useState("");
+  const [date, setDate] = useState<Date>(new Date());
   const [id, setId] = useState<number>(Date.now());
   const [priority, setPriority] = useState<"Urgent" | "Normal" | "Low">(
     "Normal"
@@ -30,14 +31,16 @@ export default function TODO() {
   const todoPropsPackage = {
     name,
     setName,
-    task,
-    setTask,
+    // task,
+    // setTask,
     priority,
     setPriority,
     todo,
     setTodo,
     id,
     setId,
+    date,
+    setDate,
   };
 
   return (
