@@ -42,7 +42,7 @@ export default function TODO() {
 
   return (
     <div className="flex flex-col m-5 sm:flex-row">
-      <div>v.0.6</div>
+      <div>v.0.6.1</div>
       <TODOMenu todoPropsPackage={todoPropsPackage} />
       <TODOList todoPropsPackage={todoPropsPackage} />
     </div>
