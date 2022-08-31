@@ -1,13 +1,20 @@
-import { iTodo, iTodoPropsPackage } from "./TODOInterfaces";
+import { iTodo, iTodoPropsPackage } from "../TODOInterfaces";
 import TODOTogglePriority from "./TODOTogglePriority";
-import { doc, setDoc, } from "firebase/firestore";
-import { db } from "../Firebase/Firebase";
-import { Calendar } from "react-calendar";
-import TODOMenuCalendar from "./TODOCalendarComponents / TODOMenuCalendar";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../Firebase/Firebase";
+import TODOMenuCalendar from "./ TODOMenuCalendar";
+import { useState } from "react";
 
 export default function TODOMenu(props: {
   todoPropsPackage: iTodoPropsPackage;
 }) {
+  const [name, setName] = useState("");
+  const [date, setDate] = useState<Date>(new Date());
+  const [id, setId] = useState<number>(Date.now());
+  const [priority, setPriority] = useState<"Urgent" | "Normal" | "Low">(
+    "Normal"
+  );
+
   async function addToFirebase(todo: iTodo) {
     try {
       await setDoc(doc(db, "users", todo.id.toString()), todo);
@@ -24,9 +31,9 @@ export default function TODOMenu(props: {
           type="text"
           placeholder="name"
           className="mx-2 px-2  border border-gray-400 rounded-xl"
-          defaultValue={props.todoPropsPackage.name}
+          defaultValue={name}
           onChange={(e) => {
-            props.todoPropsPackage.setName(e.target.value);
+            setName(e.target.value);
           }}
         ></input>
         {/* <input
@@ -38,33 +45,23 @@ export default function TODOMenu(props: {
             props.todoPropsPackage.setTask(e.target.value);
           }}
         ></input> */}
-        <TODOMenuCalendar todoPropsPackage={props.todoPropsPackage}/>
-        <TODOTogglePriority
-          priority={props.todoPropsPackage.priority}
-          setPriority={props.todoPropsPackage.setPriority}
-        />
+        <TODOMenuCalendar date={date} setDate={setDate} />
+        <TODOTogglePriority priority={priority} setPriority={setPriority} />
         <button
           className="px-5 py-2 bg-blue-700 border border-blue-400 rounded-xl font-extrabold text-white "
-          disabled={
-            props.todoPropsPackage.name 
-              ? false
-              : true
-          }
+          disabled={name ? false : true}
           style={{
-            opacity:
-              props.todoPropsPackage.name 
-                ? 1
-                : 0.5,
+            opacity: name ? 1 : 0.5,
           }}
           onClick={(e) => {
             e.preventDefault();
             let todolist: iTodo[] = [...props.todoPropsPackage.todo];
-            props.todoPropsPackage.setId(Date.now());
+            setId(Date.now());
             let todoObject: iTodo = {
-              name: props.todoPropsPackage.name,
-              date: props.todoPropsPackage.date,
-              priority: props.todoPropsPackage.priority,
-              id: props.todoPropsPackage.id,
+              name,
+              date,
+              priority,
+              id,
             };
             todolist?.push(todoObject);
             props.todoPropsPackage.setTodo(todolist);

@@ -1,5 +1,5 @@
 import TODOchangeTaks from "./TODOchangeTask";
-import { iEditTaskPropsPackage } from "./TODOInterfaces";
+import { iEditTaskPropsPackage } from "../TODOInterfaces";
 
 export default function TODOTask(props:{editTaskPropsPackage:iEditTaskPropsPackage}){
 

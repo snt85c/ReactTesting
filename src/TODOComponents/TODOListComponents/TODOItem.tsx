@@ -1,11 +1,11 @@
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
-import { db } from "../Firebase/Firebase";
-import { iTodo, iTodoPropsPackage } from "./TODOInterfaces";
+import { db } from "../../Firebase/Firebase";
+import { iTodo, iTodoPropsPackage } from "../TODOInterfaces";
 import TODOName from "./TODOName Components/TODOName";
 // import TODOTask from "./TODOTask";
 import 'react-calendar/dist/Calendar.css';
-import TODOChangeCalendar from "./TODOCalendarComponents /TODOChangeCalendar";
+import TODOListCalendar from "./TODOListCalendar";
 
 
 
@@ -14,10 +14,12 @@ export default function TODOItem(props: {
   todoPropsPackage: iTodoPropsPackage;
 }) {
 
+  // console.log(props.data)
+
   // const [isEditTask, setIsEditTask] = useState<boolean>(false);
   const [isEditName, setIsEditName] = useState<boolean>(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false)
-  const [date, setDate] = useState(props.todoPropsPackage.date);
+  const [date, setDate] = useState(props.data.date);
 
   // const handleEditTask = async (newTask: string) => {
   //   const temp = props.todoPropsPackage.todo.map((item) => {
@@ -115,7 +117,7 @@ export default function TODOItem(props: {
       <div className="flex justify-between mx-2 text-white font-extrabold bg-blue-400 border border-blue-700 rounded-xl px-5 py-2 my-2 shadow-2xl">
         <TODOName editNamePropsPackage={editNamePropsPackage}  />
         {/* <TODOTask editTaskPropsPackage={editTaskPropsPackage}/> */}
-        <TODOChangeCalendar calendarPropsPackage={calendarPropsPackage}/>
+        <TODOListCalendar calendarPropsPackage={calendarPropsPackage}/>
         <span
           data-testid="prioritySpan"
           className="cursor-pointer min-w-[25%] flex justify-center"

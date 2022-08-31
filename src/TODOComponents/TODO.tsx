@@ -1,18 +1,11 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, DocumentData, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../Firebase/Firebase";
 import { iTodo } from "./TODOInterfaces";
-import TODOList from "./TODOList";
-import TODOMenu from "./TODOMenu";
+import TODOList from "./TODOListComponents/TODOList";
+import TODOMenu from "./TODOMenuComponents/TODOMenu";
 
 export default function TODO() {
-  const [name, setName] = useState("");
-  const [task, setTask] = useState("");
-  const [date, setDate] = useState<Date>(new Date());
-  const [id, setId] = useState<number>(Date.now());
-  const [priority, setPriority] = useState<"Urgent" | "Normal" | "Low">(
-    "Normal"
-  );
   const [todo, setTodo] = useState<iTodo[]>([]);
 
   useEffect(() => {
@@ -20,8 +13,9 @@ export default function TODO() {
     async function getTodosFromFirestoreAtFirstRender() {
       const docSnap = await getDocs(collection(db, "users"));
       docSnap.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-        tempTodoArray.push(doc.data() as iTodo);
+        const temp = doc.data() as DocumentData;
+        const dataconverted: Date = temp.date.toDate();
+        tempTodoArray.push({ ...doc.data(), date: dataconverted } as iTodo);
       });
       setTodo(tempTodoArray);
     }
@@ -29,23 +23,13 @@ export default function TODO() {
   }, []);
 
   const todoPropsPackage = {
-    name,
-    setName,
-    // task,
-    // setTask,
-    priority,
-    setPriority,
     todo,
     setTodo,
-    id,
-    setId,
-    date,
-    setDate,
   };
 
   return (
     <div className="flex flex-col m-5 sm:flex-row">
-      <div>v.0.6.1</div>
+      <div>v.0.7</div>
       <TODOMenu todoPropsPackage={todoPropsPackage} />
       <TODOList todoPropsPackage={todoPropsPackage} />
     </div>

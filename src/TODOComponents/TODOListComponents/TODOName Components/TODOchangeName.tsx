@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { HandleClickOutsideComponent } from "../../HandleClickOutsideComponent";
-
+import { HandleClickOutsideComponent } from "../../../HandleClickOutsideComponent";
 export default function TODOchangeName(props: {
   name: string;
   setIsEditName: React.Dispatch<React.SetStateAction<boolean>>;

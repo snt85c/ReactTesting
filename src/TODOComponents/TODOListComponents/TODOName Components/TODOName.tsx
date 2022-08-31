@@ -1,4 +1,4 @@
-import { iEditNamePropsPackage } from "../TODOInterfaces";
+import { iEditNamePropsPackage } from "../../TODOInterfaces";
 import TODOchangeName from "./TODOchangeName";
 
 export default function TODOName(props:{editNamePropsPackage:iEditNamePropsPackage}){

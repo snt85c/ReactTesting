@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { HandleClickOutsideComponent } from "../HandleClickOutsideComponent";
-
+import { HandleClickOutsideComponent } from "../../HandleClickOutsideComponent";
 export default function TODOchangeTaks(props: {
   task: string;
   setIsEditTask: React.Dispatch<React.SetStateAction<boolean>>;

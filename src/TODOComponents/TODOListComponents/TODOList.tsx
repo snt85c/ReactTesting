@@ -1,4 +1,4 @@
-import { iTodoPropsPackage } from "./TODOInterfaces";
+import { iTodoPropsPackage } from "../TODOInterfaces";
 import TODOItem from "./TODOItem";
 
 export default function TODOList(props:{todoPropsPackage:iTodoPropsPackage}){

@@ -4,14 +4,14 @@ import { HandleClickOutsideComponent } from "../../HandleClickOutsideComponent";
 import { iTodoPropsPackage } from "../TODOInterfaces";
 
 export default function TODOMenuCalendar(props: {
-  todoPropsPackage: iTodoPropsPackage;
+  date:Date, setDate:React.Dispatch<React.SetStateAction<Date>>
 }) {
   const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false);
   const {ref} = HandleClickOutsideComponent(setIsCalendarOpen)
   return (
     <>
         <div onClick={() => setIsCalendarOpen(true)}>
-          date: {props.todoPropsPackage.date.toLocaleDateString()}
+          date: {props.date.toLocaleDateString()}
         </div>
       {isCalendarOpen && (
         <div 
@@ -20,8 +20,8 @@ export default function TODOMenuCalendar(props: {
           <div>set a date</div>
           <Calendar
           className="bg-fuchsia-50"
-            value={props.todoPropsPackage.date}
-            onChange={props.todoPropsPackage.setDate}
+            value={props.date}
+            onChange={props.setDate}
           />
           <button onClick={()=>setIsCalendarOpen(false)}>confirm</button>
         </div>
