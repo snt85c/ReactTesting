@@ -9,10 +9,16 @@ export default function TODOListCalendar(props: {
     props.calendarPropsPackage.setIsCalendarOpen
   );
 
+  // console.log(props.calendarPropsPackage.value.getDay() , new Date().getDay(), "day")
+  // console.log(props.calendarPropsPackage.value.getMonth(),  new Date().getMonth(), "month")
+
   return (
     <>
       {props.calendarPropsPackage.isCalendarOpen && (
-        <div ref={ref} className="flex flex-col absolute top-auto text-black p-2 bg-gray-300 rounded-xl shadow-xl">
+        <div
+          ref={ref}
+          className="flex flex-col absolute top-auto text-black p-2 bg-gray-300 rounded-xl shadow-xl"
+        >
           <Calendar
             className=""
             onChange={props.calendarPropsPackage.onChange}
@@ -29,9 +35,13 @@ export default function TODOListCalendar(props: {
 
       <div
         onClick={() => props.calendarPropsPackage.setIsCalendarOpen(true)}
-        className="flex justify-center items-center text-[0.8rem] cursor-pointer"
+        className="flex justify-center text-center w-1/4 items-center text-[1rem] sm:text-[1.5vw] cursor-pointer"
       >
-        {props.calendarPropsPackage.value?.toDateString()}
+        {
+        props.calendarPropsPackage.value.getDay() <= new Date().getDay() -1 && props.calendarPropsPackage.value.getMonth() !== new Date().getMonth()
+          ? "expired"
+          : 
+          props.calendarPropsPackage.value?.toDateString()}
       </div>
     </>
   );

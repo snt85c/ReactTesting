@@ -6,6 +6,7 @@ import TODOName from "./TODOName Components/TODOName";
 // import TODOTask from "./TODOTask";
 import 'react-calendar/dist/Calendar.css';
 import TODOListCalendar from "./TODOListCalendar";
+import TODOItemPriority from "./TODOItemPriority";
 
 
 
@@ -114,20 +115,14 @@ export default function TODOItem(props: {
 
   return (
     <>
-      <div className="flex justify-between mx-2 text-white font-extrabold bg-blue-400 border border-blue-700 rounded-xl px-5 py-2 my-2 shadow-2xl">
+      <div className="flex justify-between mx-2 text-white font-extrabold border bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 duration-300 border-blue-700  rounded-xl px-5 py-2 my-1 shadow-2xl">
         <TODOName editNamePropsPackage={editNamePropsPackage}  />
         {/* <TODOTask editTaskPropsPackage={editTaskPropsPackage}/> */}
         <TODOListCalendar calendarPropsPackage={calendarPropsPackage}/>
-        <span
-          data-testid="prioritySpan"
-          className="cursor-pointer min-w-[25%] flex justify-center"
-          onClick={handlePriority}
-        >
-          {props.data.priority}
-        </span>
+        <TODOItemPriority handlePriority={handlePriority} priority={props.data.priority}/> 
         <span
           data-testid="deleteSpan"
-          className="cursor-pointer min-w-[25%] flex justify-end"
+          className="cursor-pointer min-w-[5%] flex justify-end items-center hover:text-red-700 duration-300"
           onClick={handleDelete}
         >
           delete

@@ -25,7 +25,7 @@ export default function TODOMenu(props: {
   }
   return (
     <form>
-      <title className="flex flex-col justify-cente items-center border-r-2 border-black sm:min-h-screen  gap-2">
+      <title className="flex flex-col justify-cente items-center sm:border-r-2 border-black sm:min-h-screen  gap-2">
         add
         <input
           type="text"

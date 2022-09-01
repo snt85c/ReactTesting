@@ -7,7 +7,7 @@ export default function TODOName(props:{editNamePropsPackage:iEditNamePropsPacka
         <>
          {!props.editNamePropsPackage.isEditName ? (
           <span
-            className="min-w-[25%]"
+            className="min-w-[35%] text-[1rem] sm:text-[1.5vw] flex justify-center items-center"
             data-testid="nameSpan"
             onClick={() => props.editNamePropsPackage.setIsEditName(!props.editNamePropsPackage.isEditName)}
           >

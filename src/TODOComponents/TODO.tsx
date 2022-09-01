@@ -28,7 +28,7 @@ export default function TODO() {
   };
 
   return (
-    <div className="flex flex-col m-5 sm:flex-row">
+    <div className="flex flex-col sm:flex-row bg-gradient-to-t from-white to-blue-400">
       <div>v.0.7</div>
       <TODOMenu todoPropsPackage={todoPropsPackage} />
       <TODOList todoPropsPackage={todoPropsPackage} />
