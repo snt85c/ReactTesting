@@ -25,12 +25,12 @@ export default function TODOMenu(props: {
   }
   return (
     <form>
-      <fieldset className="flex flex-col justify-between items-center m-2 gap-1">
+      <fieldset className="flex flex-col justify-center sm:items-center m-2 gap-1">
         <legend>Create a new Task</legend>
         <input
           type="text"
           placeholder="name"
-          className="mx-2 px-2  border border-gray-400"
+          className=" px-2  border border-gray-400"
           defaultValue={name}
           onChange={(e) => {
             setName(e.target.value);
@@ -48,7 +48,7 @@ export default function TODOMenu(props: {
         <TODOMenuCalendar date={date} setDate={setDate} />
         <TODOTogglePriority priority={priority} setPriority={setPriority} />
         <button
-          className="px-5 py-2 font-extrabold "
+          className="px-5 py-2 font-extrabold w-full"
           disabled={name ? false : true}
           onClick={(e) => {
             e.preventDefault();

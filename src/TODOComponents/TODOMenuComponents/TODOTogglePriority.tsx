@@ -13,10 +13,10 @@ export default function TODOTogglePriority(props: {
   return (
     <button
       data-testid="buttontoggle"
-      className="flex  mx-2 px-2 justify-center items-center"
+      className="flex px-2 justify-center items-center w-full"
       onClick={(e) => toggle(e)}
     >
-      {props.priority}
+      {"Priority: " + props.priority}
     </button>
   );
 }

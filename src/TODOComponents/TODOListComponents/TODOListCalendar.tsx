@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useDragControls } from "framer-motion";
 import { Calendar } from "react-calendar";
 import { HandleClickOutsideComponent } from "../../HandleClickOutsideComponent";
 import { iCalendarPropsPackage } from "../TODOInterfaces";
@@ -12,12 +12,25 @@ export default function TODOListCalendar(props: {
 
   // console.log(props.calendarPropsPackage.value.getDay() , new Date().getDay(), "day")
   // console.log(props.calendarPropsPackage.value.getMonth(),  new Date().getMonth(), "month")
+  const dragControls = useDragControls();
 
   return (
     <>
       {props.calendarPropsPackage.isCalendarOpen && (
-        <motion.div drag ref={ref} className="flex flex-col  border absolute window gap-1 ">
-          <div className="title-bar">
+        <motion.div
+          drag
+          dragMomentum={false}
+          dragControls={dragControls}
+          dragListener={false}
+          ref={ref}
+          className="flex flex-col  border absolute window gap-1 "
+        >
+          <div
+            className="title-bar"
+            onPointerDown={(e) => {
+              dragControls.start(e);
+            }}
+          >
             <span className="title-bar-text pl-1 w-full">Set a new date</span>
             <div className="title-bar-controls pr-1">
               <button
