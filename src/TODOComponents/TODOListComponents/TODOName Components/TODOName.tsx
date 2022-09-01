@@ -5,21 +5,20 @@ export default function TODOName(props:{editNamePropsPackage:iEditNamePropsPacka
 
     return(
         <>
-         {!props.editNamePropsPackage.isEditName ? (
           <span
-            className="min-w-[35%] flex justify-center items-center"
+            className="min-w-[20%] sm:min-w-[35%] flex justify-center items-center"
             data-testid="nameSpan"
             onClick={() => props.editNamePropsPackage.setIsEditName(!props.editNamePropsPackage.isEditName)}
           >
             {props.editNamePropsPackage.name}
           </span>
-        ) : (
+          {props.editNamePropsPackage.isEditName && 
           <TODOchangeName
-            name={props.editNamePropsPackage.name}
-            setIsEditName={props.editNamePropsPackage.setIsEditName}
-            handleRenameName={props.editNamePropsPackage.handleEditName}
+          name={props.editNamePropsPackage.name}
+          setIsEditName={props.editNamePropsPackage.setIsEditName}
+          handleRenameName={props.editNamePropsPackage.handleEditName}
           />
-        )}
+        }
         </>
     )
 }

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useState } from "react";
 import Calendar from "react-calendar";
 import { HandleClickOutsideComponent } from "../../HandleClickOutsideComponent";
@@ -15,12 +16,13 @@ export default function TODOMenuCalendar(props: {
         date: {props.date.toLocaleDateString()}
       </div>
       {isCalendarOpen && (
-        <div
+        <motion.div
+        drag
           ref={ref}
           className="flex z-10 flex-col items-center absolute top-20 sm:left-20 window"
         >
-          <div className="title-bar w-full ">
-            <span className="title-bar-text pl-1 w-full">set a date</span>
+          <div className="title-bar w-[98%]">
+            <span className="title-bar-text pl-1 ">set a date</span>
             <div className="title-bar-controls pr-1">
               <button aria-label="Close"
               onClick={() => setIsCalendarOpen(false)}
@@ -28,12 +30,11 @@ export default function TODOMenuCalendar(props: {
             </div>
           </div>
           <Calendar
-            className="bg-fuchsia-50"
             value={props.date}
             onChange={props.setDate}
           />
           <button className="p-2 m-1" onClick={() => setIsCalendarOpen(false)}>confirm</button>
-        </div>
+        </motion.div>
       )}
     </>
   );

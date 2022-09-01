@@ -4,22 +4,19 @@ import { db } from "../../Firebase/Firebase";
 import { iTodo, iTodoPropsPackage } from "../TODOInterfaces";
 import TODOName from "./TODOName Components/TODOName";
 // import TODOTask from "./TODOTask";
-import 'react-calendar/dist/Calendar.css';
+import "react-calendar/dist/Calendar.css";
 import TODOListCalendar from "./TODOListCalendar";
 import TODOItemPriority from "./TODOItemPriority";
-
-
 
 export default function TODOItem(props: {
   data: iTodo;
   todoPropsPackage: iTodoPropsPackage;
 }) {
-
   // console.log(props.data)
 
   // const [isEditTask, setIsEditTask] = useState<boolean>(false);
   const [isEditName, setIsEditName] = useState<boolean>(false);
-  const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false)
+  const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false);
   const [date, setDate] = useState(props.data.date);
 
   // const handleEditTask = async (newTask: string) => {
@@ -39,14 +36,14 @@ export default function TODOItem(props: {
   //   setIsEditTask(false);
   // };
 
-  const handleEditCalendar = async ()=>{
+  const handleEditCalendar = async () => {
     await updateDoc(doc(db, "users", props.data.id.toString()), {
-          ...props.data,
-          date: date,
-        });
-        console.log(props.data.id, " => date has changed");
-        setIsCalendarOpen(false);
-  }
+      ...props.data,
+      date: date,
+    });
+    console.log(props.data.id, " => date has changed");
+    setIsCalendarOpen(false);
+  };
 
   const handleEditName = async (newName: string) => {
     const temp = props.todoPropsPackage.todo.map((item) => {
@@ -73,7 +70,6 @@ export default function TODOItem(props: {
     props.todoPropsPackage.setTodo(tempTodoList);
     await deleteDoc(doc(db, "users", props.data.id.toString()));
     console.log(props.data.id, " => has been deleted");
-
   };
 
   const handlePriority = async () => {
@@ -98,36 +94,41 @@ export default function TODOItem(props: {
   };
 
   const editNamePropsPackage = {
-    name:props.data.name,handleEditName, isEditName, setIsEditName
-  } 
+    name: props.data.name,
+    handleEditName,
+    isEditName,
+    setIsEditName,
+  };
 
   // const editTaskPropsPackage = {
   //   task:props.data.task, handleEditTask, isEditTask, setIsEditTask
   // }
 
-  const calendarPropsPackage ={
-    value:date,
+  const calendarPropsPackage = {
+    value: date,
     onChange: setDate,
     isCalendarOpen,
     setIsCalendarOpen,
-    handleEditCalendar
-  }
+    handleEditCalendar,
+  };
 
   return (
     <>
-      <div className="flex justify-between mx-2
-       py-2 my-1">
-        <TODOName editNamePropsPackage={editNamePropsPackage}  />
+      <div className="flex mx-2 my-1 justify-around">
+        <TODOName editNamePropsPackage={editNamePropsPackage} />
         {/* <TODOTask editTaskPropsPackage={editTaskPropsPackage}/> */}
-        <TODOListCalendar calendarPropsPackage={calendarPropsPackage}/>
-        <TODOItemPriority handlePriority={handlePriority} priority={props.data.priority}/> 
-        <span
-          data-testid="deleteSpan"
-          className="cursor-pointer min-w-[5%] flex justify-end items-center hover:text-red-700 duration-300"
-          onClick={handleDelete}
-        >
-          delete
-        </span>
+        <TODOListCalendar calendarPropsPackage={calendarPropsPackage} />
+          <TODOItemPriority
+            handlePriority={handlePriority}
+            priority={props.data.priority}
+          />
+          <button
+            data-testid="deleteSpan"
+            className="cursor-pointer flex justify-center items-center hover:text-red-700 duration-300"
+            onClick={handleDelete}
+          >
+            delete
+          </button>
       </div>
     </>
   );

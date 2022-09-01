@@ -5,6 +5,7 @@ import { iTodo } from "./TODOInterfaces";
 import TODOList from "./TODOListComponents/TODOList";
 import TODOMenu from "./TODOMenuComponents/TODOMenu";
 import "98.css";
+import { motion } from "framer-motion";
 
 export default function TODO() {
   const [todo, setTodo] = useState<iTodo[]>([]);
@@ -29,7 +30,7 @@ export default function TODO() {
   };
 
   return (
-    <div className="window min-h-full">
+    <motion.div drag className="window  mt-5 mx-2 sm:mx-10  bg-[#007c7c]">
       <div className="title-bar  ">
         <span className="title-bar-text pl-1">Task Organizer v.0.7</span>
         <div className="title-bar-controls pr-1">
@@ -45,6 +46,6 @@ export default function TODO() {
         <p className="status-bar-field">Slide 1</p>
         <p className="status-bar-field">CPU Usage: 14%</p>
       </div>
-    </div>
+    </motion.div>
   );
 }

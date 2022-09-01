@@ -12,11 +12,14 @@ export default function TODOList(props: {
     "clear"
   );
 
-  return (
-    <title className="flex flex-col w-full">
-      <TODOListFilterSelector setFilter={setFilter} />
+  return (<>
+    <TODOListFilterSelector filter={filter} setFilter={setFilter} />
+    <fieldset
+     className="flex flex-col sm:w-full  my-1 mx-2 ">
+      <legend>Tasks</legend>
       <TODOListSuggestionBar />
       <TODOListItemsFiltered todoPropsPackage={props.todoPropsPackage} filter={filter}/>
-    </title>
+    </fieldset>
+    </>
   );
 }

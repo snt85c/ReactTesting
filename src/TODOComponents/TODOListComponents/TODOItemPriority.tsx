@@ -5,14 +5,14 @@ export default function TODOItemPriority(props: {
 }) {
   return (
     <>
-      <span
+      <button
         data-testid="prioritySpan"
-        className="cursor-pointer min-w-[25%] flex justify-center items-center"
+        className="cursor-pointer flex justify-center items-center"
         style={{ color: props.priority === "Urgent" ? "red" : "black" }}
         onClick={props.handlePriority}
       >
         {props.priority}
-      </span>
+      </button>
     </>
   );
 }

@@ -2,33 +2,51 @@ export default function TODOListFilterSelector(props: {
   setFilter: React.Dispatch<
     React.SetStateAction<"Today" | "this Week" | "clear">
   >;
+  filter: "Today" | "this Week" | "clear";
 }) {
   return (
     <>
-      <div>filter</div>
-      <div className="flex justify-between items-center px-2 mx-2">
-        <input
-          type="radio"
-          value="Today"
-          name="Today"
-          className="field-row mx-5 px-5  my-2"
-        />
-          Today
-        <input
-          type="radio"
-          value="this Week"
-          name="this Week"
-          className="mx-5 px-5  my-2 "
-        />
-          this Week
-        <input
-          type="radio"
-          value="clear"
-          name="clear"
-          className="mx-5 px-5  my-2 "
-        />
-          clear
-      </div>
+      <fieldset className="mx-2 my-1 p-2">
+        <legend>filter</legend>
+        <form className="flex sm:flex-col flex-row justify-between items-center px-2 mx-2 gap-3">
+          <div className="field-row">
+            <input
+              id="radio5"
+              type="radio"
+              name="first-example"
+              checked={props.filter === "Today"}
+            />
+            <label htmlFor="radio5" onClick={() => props.setFilter("Today")}>
+              Today
+            </label>
+          </div>
+          <div className="field-row">
+            <input
+              id="radio5"
+              type="radio"
+              name="first-example"
+              checked={props.filter === "this Week"}
+            />
+            <label
+              htmlFor="radio5"
+              onClick={() => props.setFilter("this Week")}
+            >
+              Week
+            </label>
+          </div>
+          <div className="field-row">
+            <input
+              id="radio5"
+              type="radio"
+              name="first-example"
+              checked={props.filter === "clear"}
+            />
+            <label htmlFor="radio5" onClick={() => props.setFilter("clear")}>
+              Clear Filter
+            </label>
+          </div>
+        </form>
+      </fieldset>
     </>
   );
 }
