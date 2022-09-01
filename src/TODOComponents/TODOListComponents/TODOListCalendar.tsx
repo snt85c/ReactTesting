@@ -35,7 +35,7 @@ export default function TODOListCalendar(props: {
 
       <div
         onClick={() => props.calendarPropsPackage.setIsCalendarOpen(true)}
-        className="flex justify-center text-center w-1/4 items-center text-[1rem] sm:text-[1.5vw] cursor-pointer"
+        className="flex justify-center text-center w-1/4 items-center cursor-pointer"
       >
         {
         props.calendarPropsPackage.value.getDay() <= new Date().getDay() -1 && props.calendarPropsPackage.value.getMonth() !== new Date().getMonth()

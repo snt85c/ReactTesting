@@ -4,19 +4,19 @@ export default function TODOTogglePriority(props: {
     React.SetStateAction<"Urgent" | "Normal" | "Low">
   >;
 }) {
-  const toggle = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const toggle = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     if (props.priority === "Normal") props.setPriority("Urgent");
     if (props.priority === "Urgent") props.setPriority("Low");
     if (props.priority === "Low") props.setPriority("Normal");
   };
   return (
-    <div
+    <button
       data-testid="buttontoggle"
-      className="flex  mx-2 px-2 border border-gray-400 rounded-xl "
+      className="flex  mx-2 px-2 justify-center items-center"
       onClick={(e) => toggle(e)}
     >
       {props.priority}
-    </div>
+    </button>
   );
 }

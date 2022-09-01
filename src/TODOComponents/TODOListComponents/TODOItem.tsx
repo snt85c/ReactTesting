@@ -115,7 +115,8 @@ export default function TODOItem(props: {
 
   return (
     <>
-      <div className="flex justify-between mx-2 text-white font-extrabold border bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 duration-300 border-blue-700  rounded-xl px-5 py-2 my-1 shadow-2xl">
+      <div className="flex justify-between mx-2
+       py-2 my-1">
         <TODOName editNamePropsPackage={editNamePropsPackage}  />
         {/* <TODOTask editTaskPropsPackage={editTaskPropsPackage}/> */}
         <TODOListCalendar calendarPropsPackage={calendarPropsPackage}/>

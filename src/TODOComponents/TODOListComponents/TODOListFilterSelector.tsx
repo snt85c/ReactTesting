@@ -1,11 +1,33 @@
-export default function TODOListFilterSelector(props:{setFilter:React.Dispatch<React.SetStateAction<"Today" | "this Week" | "clear">>}) {
+export default function TODOListFilterSelector(props: {
+  setFilter: React.Dispatch<
+    React.SetStateAction<"Today" | "this Week" | "clear">
+  >;
+}) {
   return (
     <>
-      <div className="flex justify-center items-center">
-        <div>filter</div>
-        <button onClick={()=>props.setFilter("Today")} className="mx-5 px-5  my-2 rounded-xl border border-black">Today</button>
-        <button onClick={()=>props.setFilter("this Week")} className="mx-5 px-5  my-2 rounded-xl border border-black">this Week</button>
-        <button onClick={()=>props.setFilter("clear")} className="mx-5 px-5  my-2 rounded-xl border border-black">clear</button>
+      <div>filter</div>
+      <div className="flex justify-between items-center px-2 mx-2">
+        <input
+          type="radio"
+          value="Today"
+          name="Today"
+          className="field-row mx-5 px-5  my-2"
+        />
+          Today
+        <input
+          type="radio"
+          value="this Week"
+          name="this Week"
+          className="mx-5 px-5  my-2 "
+        />
+          this Week
+        <input
+          type="radio"
+          value="clear"
+          name="clear"
+          className="mx-5 px-5  my-2 "
+        />
+          clear
       </div>
     </>
   );

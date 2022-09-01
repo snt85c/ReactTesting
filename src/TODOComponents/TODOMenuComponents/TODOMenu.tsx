@@ -25,12 +25,12 @@ export default function TODOMenu(props: {
   }
   return (
     <form>
-      <title className="flex flex-col justify-cente items-center sm:border-r-2 border-black sm:min-h-screen  gap-2">
-        add
+      <fieldset className="flex flex-col justify-between items-center m-2 gap-1">
+        <legend>Create a new Task</legend>
         <input
           type="text"
           placeholder="name"
-          className="mx-2 px-2  border border-gray-400 rounded-xl"
+          className="mx-2 px-2  border border-gray-400"
           defaultValue={name}
           onChange={(e) => {
             setName(e.target.value);
@@ -48,11 +48,8 @@ export default function TODOMenu(props: {
         <TODOMenuCalendar date={date} setDate={setDate} />
         <TODOTogglePriority priority={priority} setPriority={setPriority} />
         <button
-          className="px-5 py-2 bg-blue-700 border border-blue-400 rounded-xl font-extrabold text-white "
+          className="px-5 py-2 font-extrabold "
           disabled={name ? false : true}
-          style={{
-            opacity: name ? 1 : 0.5,
-          }}
           onClick={(e) => {
             e.preventDefault();
             let todolist: iTodo[] = [...props.todoPropsPackage.todo];
@@ -70,7 +67,7 @@ export default function TODOMenu(props: {
         >
           Add Task
         </button>
-      </title>
+      </fieldset>
     </form>
   );
 }

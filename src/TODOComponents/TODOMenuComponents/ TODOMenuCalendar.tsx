@@ -4,26 +4,35 @@ import { HandleClickOutsideComponent } from "../../HandleClickOutsideComponent";
 import { iTodoPropsPackage } from "../TODOInterfaces";
 
 export default function TODOMenuCalendar(props: {
-  date:Date, setDate:React.Dispatch<React.SetStateAction<Date>>
+  date: Date;
+  setDate: React.Dispatch<React.SetStateAction<Date>>;
 }) {
   const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false);
-  const {ref} = HandleClickOutsideComponent(setIsCalendarOpen)
+  const { ref } = HandleClickOutsideComponent(setIsCalendarOpen);
   return (
     <>
-        <div onClick={() => setIsCalendarOpen(true)}>
-          date: {props.date.toLocaleDateString()}
-        </div>
+      <div onClick={() => setIsCalendarOpen(true)}>
+        date: {props.date.toLocaleDateString()}
+      </div>
       {isCalendarOpen && (
-        <div 
-        ref = {ref}
-        className="flex z-10 flex-col items-center absolute top-auto text-black p-2 rounded-xl bg-slate-200 shadow-xl gap-1">
-          <div>set a date</div>
+        <div
+          ref={ref}
+          className="flex z-10 flex-col items-center absolute top-20 sm:left-20 window"
+        >
+          <div className="title-bar w-full ">
+            <span className="title-bar-text pl-1 w-full">set a date</span>
+            <div className="title-bar-controls pr-1">
+              <button aria-label="Close"
+              onClick={() => setIsCalendarOpen(false)}
+              ></button>
+            </div>
+          </div>
           <Calendar
-          className="bg-fuchsia-50"
+            className="bg-fuchsia-50"
             value={props.date}
             onChange={props.setDate}
           />
-          <button onClick={()=>setIsCalendarOpen(false)}>confirm</button>
+          <button className="p-2 m-1" onClick={() => setIsCalendarOpen(false)}>confirm</button>
         </div>
       )}
     </>

@@ -8,7 +8,7 @@ export default function TODOItemPriority(props: {
       <span
         data-testid="prioritySpan"
         className="cursor-pointer min-w-[25%] flex justify-center items-center"
-        style={{ color: props.priority === "Urgent" ? "red" : "white" }}
+        style={{ color: props.priority === "Urgent" ? "red" : "black" }}
         onClick={props.handlePriority}
       >
         {props.priority}
