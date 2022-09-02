@@ -1,4 +1,4 @@
-import { motion, useDragControls } from "framer-motion";
+import { motion} from "framer-motion";
 import { Calendar } from "react-calendar";
 import { HandleClickOutsideComponent } from "../../HandleClickOutsideComponent";
 import { iCalendarPropsPackage } from "../TODOInterfaces";
@@ -10,9 +10,9 @@ export default function TODOListCalendar(props: {
     props.calendarPropsPackage.setIsCalendarOpen
   );
 
-  // console.log(props.calendarPropsPackage.value.getDay() , new Date().getDay(), "day")
+  // console.log(props.calendarPropsPackage.value , new Date(), "day",props.calendarPropsPackage.value )
   // console.log(props.calendarPropsPackage.value.getMonth(),  new Date().getMonth(), "month")
-  const dragControls = useDragControls();
+  // const dragControls = useDragControls();
 
   return (
     <>
@@ -20,16 +20,16 @@ export default function TODOListCalendar(props: {
         <motion.div
           drag
           dragMomentum={false}
-          dragControls={dragControls}
-          dragListener={false}
+          // dragControls={dragControls}
+          // dragListener={false}
           ref={ref}
           className="flex flex-col  border absolute window gap-1 "
         >
           <div
             className="title-bar"
-            onPointerDown={(e) => {
-              dragControls.start(e);
-            }}
+            // onPointerDown={(e) => {
+            //   dragControls.start(e);
+            // }}
           >
             <span className="title-bar-text pl-1 w-full">Set a new date</span>
             <div className="title-bar-controls pr-1">
@@ -50,19 +50,26 @@ export default function TODOListCalendar(props: {
             className=" text-black"
             onClick={() => props.calendarPropsPackage.handleEditCalendar()}
           >
-            confirm
+            Confirm
           </button>
         </motion.div>
       )}
 
       <div
         onClick={() => props.calendarPropsPackage.setIsCalendarOpen(true)}
-        className="flex justify-center text-center w-1/4 items-center cursor-pointer"
+        className="flex justify-start text-center w-1/4 items-center cursor-pointer"
       >
-        {props.calendarPropsPackage.value.getDay() <= new Date().getDay() - 1 &&
-        props.calendarPropsPackage.value.getMonth() !== new Date().getMonth()
-          ? "expired"
-          : props.calendarPropsPackage.value?.toDateString()}
+        <span className="mr-2">Date: </span>
+        <span>{props.calendarPropsPackage.value?.toLocaleDateString()}</span>
+        <span className="text-red-700">
+          <span className="ml-2">
+            {props.calendarPropsPackage.value < new Date()
+              ? //  &&
+                // props.calendarPropsPackage.value.getMonth() !== new Date().getMonth()
+                "  expired"
+              : ""}
+          </span>
+        </span>
       </div>
     </>
   );

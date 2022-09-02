@@ -36,15 +36,6 @@ export default function TODOMenu(props: {
             setName(e.target.value);
           }}
         ></input>
-        {/* <input
-          type="text"
-          placeholder="task"
-          className="mx-2 px-2 border border-gray-400 rounded-xl"
-          defaultValue={pops.todoPropsPackage.task}
-          onChange={(e) => {
-            props.todoPropsPackage.setTask(e.target.value);
-          }}
-        ></input> */}
         <TODOMenuCalendar date={date} setDate={setDate} />
         <TODOTogglePriority priority={priority} setPriority={setPriority} />
         <button

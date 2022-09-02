@@ -5,7 +5,7 @@ import { iTodo } from "./TODOInterfaces";
 import TODOList from "./TODOListComponents/TODOList";
 import TODOMenu from "./TODOMenuComponents/TODOMenu";
 import "98.css";
-import { motion, useDragControls } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function TODO() {
   const [todo, setTodo] = useState<iTodo[]>([]);
@@ -29,22 +29,13 @@ export default function TODO() {
     setTodo,
   };
 
-  const dragControls = useDragControls();
-
   return (
     <motion.div
       drag
       dragMomentum={false}
-      dragControls={dragControls}
-      dragListener={false}
       className="window  mt-5 mx-2 sm:mx-10  bg-[#007c7c]"
     >
-      <div
-        className="title-bar  "
-        onPointerDown={(e) => {
-          dragControls.start(e);
-        }}
-      >
+      <div className="title-bar  ">
         <span className="title-bar-text pl-1">Task Organizer v.0.7</span>
         <div className="title-bar-controls pr-1">
           <button aria-label="Close" disabled></button>
