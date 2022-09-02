@@ -1,4 +1,4 @@
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
 import { Calendar } from "react-calendar";
 import { HandleClickOutsideComponent } from "../../HandleClickOutsideComponent";
 import { iCalendarPropsPackage } from "../TODOInterfaces";
@@ -60,14 +60,12 @@ export default function TODOListCalendar(props: {
         className="flex justify-start text-center w-1/4 items-center cursor-pointer"
       >
         <span className="mr-2">Date: </span>
-        <span>{props.calendarPropsPackage.value?.toLocaleDateString()}</span>
+        <span data-testid="dateSpan">
+          {props.calendarPropsPackage.value?.toLocaleDateString()}
+        </span>
         <span className="text-red-700">
           <span className="ml-2">
-            {props.calendarPropsPackage.value < new Date()
-              ? //  &&
-                // props.calendarPropsPackage.value.getMonth() !== new Date().getMonth()
-                "  expired"
-              : ""}
+            {props.calendarPropsPackage.value < new Date() ? "  expired" : ""}
           </span>
         </span>
       </div>
