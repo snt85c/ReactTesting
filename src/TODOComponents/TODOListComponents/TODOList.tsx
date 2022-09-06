@@ -13,7 +13,7 @@ export default function TODOList(props: {
   return (<>
     <TODOListFilterSelector filter={filter} setFilter={setFilter} />
     <fieldset
-     className="flex flex-col sm:w-full  my-1 mx-2 ">
+     className="flex flex-col w-[90%]  my-1 mx-2 ">
       <legend>Tasks</legend>
       <TODOListItemsFiltered todoPropsPackage={props.todoPropsPackage} filter={filter}/>
     </fieldset>

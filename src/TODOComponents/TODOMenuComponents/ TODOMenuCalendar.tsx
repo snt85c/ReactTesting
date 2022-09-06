@@ -28,9 +28,7 @@ export default function TODOMenuCalendar(props: {
           ref={ref}
           className="flex z-10 flex-col items-center absolute top-20 sm:left-20 window"
         >
-          <div
-            className="title-bar w-[98%]"
-          >
+          <div className="title-bar w-[98%]">
             <span className="title-bar-text pl-1 ">set a date</span>
             <div className="title-bar-controls pr-1">
               <button

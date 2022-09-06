@@ -29,8 +29,9 @@ export default function TODOMenu(props: {
         <legend>Create a new Task</legend>
         <input
           type="text"
+          name="textbox-name-menu"
           placeholder="name"
-          className=" px-2  border border-gray-400"
+          className=" px-2 w-full  border border-gray-400"
           defaultValue={name}
           onChange={(e) => {
             setName(e.target.value);

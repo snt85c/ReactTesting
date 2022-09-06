@@ -6,7 +6,7 @@ export default function TODOItemPriority(props: {
     <div className="flex justify-center items-center">
       priority: 
       <button
-        data-testid="prioritySpan"
+        aria-label="button-list-priority"
         className="cursor-pointer flex justify-center items-center"
         style={{ color: props.priority === "Urgent" ? "red" : "black" }}
         onClick={props.handlePriority}
@@ -14,5 +14,6 @@ export default function TODOItemPriority(props: {
         {props.priority}
       </button>
     </div>
+    
   );
 }

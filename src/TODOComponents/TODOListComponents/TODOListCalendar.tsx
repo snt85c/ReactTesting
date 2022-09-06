@@ -59,10 +59,12 @@ export default function TODOListCalendar(props: {
         onClick={() => props.calendarPropsPackage.setIsCalendarOpen(true)}
         className="flex justify-start text-center w-1/4 items-center cursor-pointer"
       >
-        <span className="mr-2">Date: </span>
-        <span data-testid="dateSpan">
-          {props.calendarPropsPackage.value?.toLocaleDateString()}
-        </span>
+        <span>Date: </span>
+        <input
+          type="text"
+          aria-label="input-list-date"
+          value={props.calendarPropsPackage.value?.toLocaleDateString()}
+        />
         <span className="text-red-700">
           <span className="ml-2">
             {props.calendarPropsPackage.value < new Date() ? "  expired" : ""}

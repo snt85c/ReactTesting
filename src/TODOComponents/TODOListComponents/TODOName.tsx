@@ -8,7 +8,8 @@ export default function TODOName(props: {
       <span>Task:</span>
       <input
         className="w-full flex justify-center items-center my-1"
-        data-testid="nameSpan"
+        type="text"
+        aria-label="input-name-list"
         value={props.editNamePropsPackage.name}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           props.editNamePropsPackage.handleEditName(e.target.value)

@@ -8,21 +8,23 @@ export default function TODOListFilterSelector(props: {
     <>
       <fieldset className="mx-2 my-1 p-2">
         <legend>filter</legend>
-        <form className="flex sm:flex-col flex-row justify-between items-center px-2 mx-2 gap-3">
+        <form className="flex md:flex-col lex-row justify-between items-center px-2 mx-2 gap-3">
           <div className="field-row">
             <input
-              id="radio5"
               type="radio"
+              value="Today"
               name="first-example"
               checked={props.filter === "Today"}
             />
-            <label htmlFor="radio5" onClick={() => props.setFilter("Today")}>
+            <label
+              htmlFor="radio5"
+              onClick={() => props.setFilter("Today")}
+            >
               Today
             </label>
           </div>
           <div className="field-row">
             <input
-              id="radio5"
               type="radio"
               name="first-example"
               checked={props.filter === "this Week"}
@@ -36,7 +38,6 @@ export default function TODOListFilterSelector(props: {
           </div>
           <div className="field-row">
             <input
-              id="radio5"
               type="radio"
               name="first-example"
               checked={props.filter === "clear"}

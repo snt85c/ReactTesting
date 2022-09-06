@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, cleanup} from "@testing-library/react";
 import TODO from "./TODO";
+import TODOList from "./TODOListComponents/TODOList";
 
 describe("TODO bundle test", () => {
   it("expect the name input on the menu to be present", () => {
@@ -41,7 +42,7 @@ describe("TODO bundle test", () => {
 describe("TODO add test", () => {
   it("add a taks  with name 'test', date of today, and priority 'Urgent' ", () => {
     render(<TODO />);
-    //set the constant data that is passed to the menu and expected to be found on the list of todos
+    //set the constant data that is passed to the menu and is expected to be found on the list of todos
     const EXPECTED_INPUT = "test";
     const EXPECTED_PRIORITY = "Urgent";
     const EXPECTED_DATE = new Date().toLocaleDateString();
@@ -61,13 +62,15 @@ describe("TODO add test", () => {
     fireEvent.click(TODOMenuAddButton);
 
     //get the dom components from the TODOList, which are now rendered after
-    const TODOListNameSpan = screen.getByTestId("nameSpan");
-    const TODOListPrioritySpan = screen.getByTestId("prioritySpan");
-    const TODOListDateSpan = screen.getByTestId("dateSpan");
 
+    const TODOListNameSpan = screen.getByRole("textbox",{name:"input-name-list"})
+    const TODOListPrioritySpan = screen.getByRole("button",{name:"button-list-priority"});
+    const TODOListDateSpan = screen.getByRole("textbox", {name:"input-list-date"});
+
+    screen.debug()
     expect(TODOListNameSpan.value).toBe(EXPECTED_INPUT);
     expect(TODOListPrioritySpan.textContent).toBe(EXPECTED_PRIORITY);
-    expect(TODOListDateSpan.textContent).toBe(EXPECTED_DATE);
+    expect(TODOListDateSpan.value).toBe(EXPECTED_DATE);
   });
 
   it("add two todo in the list, check for lenght of the list and value of the components", () => {
@@ -103,9 +106,9 @@ describe("TODO add test", () => {
     fireEvent.click(TODOMenuAddButton);
 
     //we use getALLbyTestID as we expect to have multiple TODOItems, this will result in each constant to be of type HTMLElement[] (an array of HTMLElement)
-    const TODOListNameSpan = screen.getAllByTestId("nameSpan");
-    const TODOListPrioritySpan = screen.getAllByTestId("prioritySpan");
-    const TODOListDateSpan = screen.getAllByTestId("dateSpan");
+    const TODOListNameSpan = screen.getAllByRole("textbox",{name:"input-name-list"})
+    const TODOListPrioritySpan = screen.getAllByRole("button",{name:"button-list-priority"});
+    const TODOListDateSpan = screen.getAllByRole("textbox", {name:"input-list-date"});
 
     //we expect all the resulting arrays to be lenght 2, we check for all of them not to be of different lenghts than 2
     expect(TODOListNameSpan.length).not.toBe(1)
@@ -119,8 +122,8 @@ describe("TODO add test", () => {
     expect(TODOListPrioritySpan[0].textContent).toBe(EXPECTED_PRIORITY_1)
     expect(TODOListPrioritySpan[1].textContent).toBe(EXPECTED_PRIORITY_2)
     
-    expect(TODOListDateSpan[0].textContent).toBe(EXPECTED_DATE)
-    expect(TODOListDateSpan[1].textContent).toBe(EXPECTED_DATE)
+    expect(TODOListDateSpan[0].value).toBe(EXPECTED_DATE)
+    expect(TODOListDateSpan[1].value).toBe(EXPECTED_DATE)
   });
 });
 

@@ -33,7 +33,7 @@ export default function TODO() {
     <motion.div
       drag
       dragMomentum={false}
-      className="window  mt-5 mx-2 sm:mx-10  bg-[#007c7c]"
+      className="window m-5  bg-[#007c7c]"
     >
       <div className="title-bar  ">
         <span className="title-bar-text pl-1">Task Organizer v.0.7</span>
@@ -41,7 +41,7 @@ export default function TODO() {
           <button aria-label="Close" disabled></button>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row">
+      <div className="flex flex-col md:flex-row">
         <TODOMenu todoPropsPackage={todoPropsPackage} />
         <TODOList todoPropsPackage={todoPropsPackage} />
       </div>

@@ -55,7 +55,7 @@ export default function TODOListItemsFiltered(props: {
             />
           );
       }
-      return 0
+      return
     });
 
   return <div >{todoList}</div>;
