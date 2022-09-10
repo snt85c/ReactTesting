@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Calendar } from "react-calendar";
-import { HandleClickOutsideComponent } from "../../HandleClickOutsideComponent";
+import { HandleClickOutsideComponent } from "../HandleClickOutsideComponent";
 import { iCalendarPropsPackage } from "../TODOInterfaces";
 
 export default function TODOListCalendar(props: {
@@ -20,17 +20,10 @@ export default function TODOListCalendar(props: {
         <motion.div
           drag
           dragMomentum={false}
-          // dragControls={dragControls}
-          // dragListener={false}
           ref={ref}
           className="flex flex-col  border absolute window gap-1 "
         >
-          <div
-            className="title-bar"
-            // onPointerDown={(e) => {
-            //   dragControls.start(e);
-            // }}
-          >
+          <div className="title-bar">
             <span className="title-bar-text pl-1 w-full">Set a new date</span>
             <div className="title-bar-controls pr-1">
               <button
@@ -67,7 +60,10 @@ export default function TODOListCalendar(props: {
         />
         <span className="text-red-700">
           <span className="ml-2">
-            {props.calendarPropsPackage.value < new Date() ? "  expired" : ""}
+            {props.calendarPropsPackage.value.getDate() + 1 <
+            new Date().getDate() + 1
+              ? "  expired"
+              : ""}
           </span>
         </span>
       </div>

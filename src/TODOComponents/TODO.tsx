@@ -29,14 +29,23 @@ export default function TODO() {
     setTodo,
   };
 
+  useEffect(() => {
+    function telegramAlert() {
+        fetch(
+          `https://api.telegram.org/bot5531898247:AAG8rxOFIKmlwS6PYBVTuXdTGMqIaSpl5eE/sendMessage?chat_id=231233238&text=new visit to TaskManager: ${new Date()} `
+        );
+    }
+    telegramAlert();
+  }, []);	
+
   return (
     <motion.div
-      drag
-      dragMomentum={false}
+      // drag
+      // dragMomentum={false}
       className="window m-5  bg-[#007c7c]"
     >
       <div className="title-bar  ">
-        <span className="title-bar-text pl-1">Task Organizer v.0.7</span>
+        <span className="title-bar-text pl-1">Task Manager v.0.7</span>
         <div className="title-bar-controls pr-1">
           <button aria-label="Close" disabled></button>
         </div>

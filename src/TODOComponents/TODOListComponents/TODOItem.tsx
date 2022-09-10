@@ -16,18 +16,27 @@ export default function TODOItem(props: {
   const [date, setDate] = useState(props.data.date);
 
   const handleEditCalendar = async () => {
+    const temp = props.todoPropsPackage.todo.map((item) => {
+      if (item.id === props.data.id) {
+        props.data.date = date;
+        return item;
+      }
+      return item;
+    });
+    props.todoPropsPackage.setTodo(temp);
     await updateDoc(doc(db, "users", props.data.id.toString()), {
       ...props.data,
       date: date,
     });
     console.log(props.data.id, " => date has changed");
+
     setIsCalendarOpen(false);
   };
 
   const handleEditName = async (newName: string) => {
     const temp = props.todoPropsPackage.todo.map((item) => {
       if (item.id === props.data.id) {
-        props.data.name = newName /*? newName : "empty";*/
+        props.data.name = newName; /*? newName : "empty";*/
         return item;
       }
       return item;
@@ -94,18 +103,19 @@ export default function TODOItem(props: {
         <div className="flex flex-row justify-between">
           <TODOListCalendar calendarPropsPackage={calendarPropsPackage} />
           <div className="flex flex-row">
-          <TODOItemPriority
-            handlePriority={handlePriority}
-            priority={props.data.priority}
+            <TODOItemPriority
+              handlePriority={handlePriority}
+              priority={props.data.priority}
             />
-          <button
-            data-testid="deleteSpan"
-            className="cursor-pointer flex justify-center items-center hover:text-red-700 duration-300"
-            onClick={handleDelete}
+            <button
+              aria-label="button-list-delete"
+              data-testid="deleteSpan"
+              className="cursor-pointer flex justify-center items-center hover:text-red-700 duration-300"
+              onClick={handleDelete}
             >
-            delete
-          </button>
-            </div>
+              delete
+            </button>
+          </div>
         </div>
       </div>
     </>

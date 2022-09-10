@@ -12,8 +12,7 @@ export default function TODOTogglePriority(props: {
   };
   return (
     <button
-      data-testid="buttontoggle"
-      className="flex px-2 justify-center items-center w-full"
+      className="flex px-2  py-1 min-h-[40px] justify-center items-center w-full"
       onClick={(e) => toggle(e)}
     >
       {"Priority: " + props.priority}

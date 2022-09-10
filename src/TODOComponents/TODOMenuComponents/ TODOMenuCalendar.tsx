@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Calendar from "react-calendar";
-import { HandleClickOutsideComponent } from "../../HandleClickOutsideComponent";
+import { HandleClickOutsideComponent } from "../HandleClickOutsideComponent";
 
 export default function TODOMenuCalendar(props: {
   date: Date;
@@ -13,7 +13,7 @@ export default function TODOMenuCalendar(props: {
   return (
     <>
       <button
-        className="mt-2 w-full"
+        className="mt-2 py-1 w-full"
         onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
           e.preventDefault();
           setIsCalendarOpen(true);
