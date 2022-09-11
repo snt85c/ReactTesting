@@ -56,7 +56,7 @@ export default function TODOListCalendar(props: {
         <input
           type="text"
           aria-label="input-list-date"
-          value={props.calendarPropsPackage.value?.toLocaleDateString()}
+          defaultValue={props.calendarPropsPackage.value?.toLocaleDateString()}
         />
         <span className="text-red-700">
           <span className="ml-2">

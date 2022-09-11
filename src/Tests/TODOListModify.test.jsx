@@ -1,19 +1,16 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import TODO from "../TODOComponents/TODO";
 
 describe("TODO MODIFY TEST BUNDLE", () => {
-  it("add one, then modify the name", () => {
+  it("add one, then MODIFY THE NAME", () => {
     render(<TODO />);
-
     const BEFORE_MODIFICATION = "modification test 1";
     const AFTER_MODIFICATION = "modification test 2";
 
     //add and click, as usual
-    fireEvent.change(screen.getByPlaceholderText(/name/i), {
-      target: { value: BEFORE_MODIFICATION },
-    });
-    fireEvent.click(
+    userEvent.type(screen.getByPlaceholderText(/name/i), BEFORE_MODIFICATION);
+    userEvent.click(
       screen.getByRole("button", {
         name: /add task/i,
       })
@@ -35,7 +32,7 @@ describe("TODO MODIFY TEST BUNDLE", () => {
     );
   });
 
-  it("add one, then modify the date", async () => {
+  it("add one, then MODIFY THE DATE", async () => {
     render(<TODO />);
     const monthNames = [
       "January",
@@ -64,10 +61,7 @@ describe("TODO MODIFY TEST BUNDLE", () => {
       tomorrow.getFullYear();
 
     //i set the data on screen by creating a task with a name, then clicking "add task" which will create a task with the date of today
-    userEvent.type(
-      screen.getByPlaceholderText(/name/i),
-      "date modification test"
-    );
+    userEvent.type(screen.getByPlaceholderText(/name/i), tomorrowToString);
     userEvent.click(
       screen.getByRole("button", {
         name: /add task/i,
@@ -79,11 +73,38 @@ describe("TODO MODIFY TEST BUNDLE", () => {
     userEvent.click(screen.getByRole("textbox", { name: "input-list-date" }));
     //the aria-label for the 25/09/2022 button is styled like this : "September 25, 2022" so i click on it to set it,
     userEvent.click(screen.getByRole("button", { name: tomorrowToString }));
+    expect(
+      screen.getByRole("button", { name: tomorrowToString })
+    ).toBeInTheDocument();
     // click on confirm to close the calendar overlay
     userEvent.click(screen.getByRole("button", { name: "Confirm" }));
 
+    waitFor(() => {
+      expect(
+        screen.findByRole("textbox", { name: "input-list-date" }).value
+      ).toEqual(tomorrow.toLocaleDateString());
+    });
+  });
+
+  it("add one, then MODIFIES THE PRIORITY", () => {
+    render(<TODO />);
+    //add and click, as usual
+    userEvent.type(
+      screen.getByPlaceholderText(/name/i),
+      "priority modification test"
+    );
+    userEvent.click(
+      screen.getByRole("button", {
+        name: /add task/i,
+      })
+    );
+
+    userEvent.click(
+      screen.getByRole("button", { name: "button-list-priority" })
+    );
+
     expect(
-      screen.getByRole("textbox", { name: "input-list-date" }).value
-    ).toEqual(tomorrow.toLocaleDateString());
+      screen.getByRole("button", { name: "button-list-priority" }).textContent
+    ).toEqual("Urgent");
   });
 });

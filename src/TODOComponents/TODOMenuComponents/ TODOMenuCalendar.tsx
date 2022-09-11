@@ -39,7 +39,7 @@ export default function TODOMenuCalendar(props: {
           </div>
           <Calendar value={props.date} onChange={props.setDate} />
           <button className="p-2 m-1" onClick={() => setIsCalendarOpen(false)}>
-            confirm
+            Confirm
           </button>
         </motion.div>
       )}

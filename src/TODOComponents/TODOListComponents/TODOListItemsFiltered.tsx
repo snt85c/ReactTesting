@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { iTodo, iTodoPropsPackage } from "../TODOInterfaces";
 import TODOItem from "./TODOItem";
 
@@ -5,9 +6,9 @@ export default function TODOListItemsFiltered(props: {
   todoPropsPackage: iTodoPropsPackage;
   filter: "Today" | "this Week" | "clear";
 }) {
-  let todoList = props.todoPropsPackage.todo
+  let todoList: (JSX.Element | undefined)[] = props.todoPropsPackage.todo
     .sort((a: iTodo, b: iTodo): number => {
-      return a.date.getDate() - b.date.getDate()
+      return a.date.getDate() - b.date.getDate();
     })
     // .sort((a: iTodo, b: iTodo): number => {
     //   return a.date.getMonth() - b.date.getMonth();
@@ -34,7 +35,8 @@ export default function TODOListItemsFiltered(props: {
           break;
         case "this Week":
           if (
-            item.date.getDate() +1 <= today.getDate() + 7
+            item.date.getDate() + 1 <=
+            today.getDate() + 7
             //  && item.date.getMonth() === today.getMonth()
           ) {
             return (
@@ -55,9 +57,12 @@ export default function TODOListItemsFiltered(props: {
             />
           );
       }
-      return <> </>
+      // return <> </>
     });
 
+  // useEffect(() => {
+  //   console.log(todoList);
+  // }, [todoList]);
 
   return <div>{todoList}</div>;
 }
