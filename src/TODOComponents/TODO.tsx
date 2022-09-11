@@ -4,8 +4,10 @@ import { db } from "../Firebase/Firebase";
 import { iTodo } from "./TODOInterfaces";
 import TODOList from "./TODOListComponents/TODOList";
 import TODOMenu from "./TODOMenuComponents/TODOMenu";
-import "98.css";
 import { motion } from "framer-motion";
+import "98.css";
+
+
 
 export default function TODO() {
   const [todo, setTodo] = useState<iTodo[]>([]);

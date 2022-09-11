@@ -100,9 +100,9 @@ export default function TODOItem(props: {
     <>
       <div className="flex flex-col  mx-2 my-1 justify-around">
         <TODOName editNamePropsPackage={editNamePropsPackage} />
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-col sm:flex-row justify-between gap-1">
           <TODOListCalendar calendarPropsPackage={calendarPropsPackage} />
-          <div className="flex flex-row">
+          <div className="flex flex-row justify-end">
             <TODOItemPriority
               handlePriority={handlePriority}
               priority={props.data.priority}
@@ -117,7 +117,7 @@ export default function TODOItem(props: {
             </button>
           </div>
         </div>
-      </div>
+        </div>
     </>
   );
 }

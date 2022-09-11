@@ -50,7 +50,7 @@ export default function TODOListCalendar(props: {
 
       <div
         onClick={() => props.calendarPropsPackage.setIsCalendarOpen(true)}
-        className="flex justify-start text-center w-1/4 items-center cursor-pointer"
+        className="flex justify-start text-center w-1/3 items-center cursor-pointer"
       >
         <span>Date: </span>
         <input
