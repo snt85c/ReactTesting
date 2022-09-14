@@ -29,6 +29,7 @@ export default function TODOMenu(props: {
     todolist?.push(todoObject);
     props.todoPropsPackage.setTodo(todolist);
     addToFirebase(todoObject);
+    setName("")
   }
 
   async function addToFirebase(todo: iTodo) {
@@ -47,7 +48,7 @@ export default function TODOMenu(props: {
           type="text"
           placeholder="name"
           className=" px-2 w-full  border border-gray-400"
-          defaultValue={name}
+          value={name}
           onChange={(e) => {
             setName(e.target.value);
           }}

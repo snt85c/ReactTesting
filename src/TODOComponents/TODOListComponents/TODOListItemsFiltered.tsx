@@ -6,24 +6,15 @@ export default function TODOListItemsFiltered(props: {
   todoPropsPackage: iTodoPropsPackage;
   filter: "Today" | "this Week" | "clear";
 }) {
-  let todoList: (JSX.Element | undefined)[] = props.todoPropsPackage.todo
+  const today = new Date();
+  let todoList = props.todoPropsPackage.todo
     .sort((a: iTodo, b: iTodo): number => {
       return a.date.getDate() - b.date.getDate();
     })
-    // .sort((a: iTodo, b: iTodo): number => {
-    //   return a.date.getMonth() - b.date.getMonth();
-    // })
-    // .sort((a: iTodo, b: iTodo): number => {
-    //     return a.date.getFullYear() - b.date.getFullYear();
-    //   })
     .map((item, i) => {
-      const today = new Date();
       switch (props.filter) {
         case "Today":
-          if (
-            item.date.getDate() === today.getDate()
-            // && item.date.getMonth() === today.getMonth()
-          ) {
+          if (item.date.getDate() === today.getDate()) {
             return (
               <TODOItem
                 data={item}
@@ -34,11 +25,7 @@ export default function TODOListItemsFiltered(props: {
           }
           break;
         case "this Week":
-          if (
-            item.date.getDate() + 1 <=
-            today.getDate() + 7
-            //  && item.date.getMonth() === today.getMonth()
-          ) {
+          if (item.date.getDate() + 1 <= today.getDate() + 7) {
             return (
               <TODOItem
                 data={item}
@@ -48,7 +35,7 @@ export default function TODOListItemsFiltered(props: {
             );
           }
           break;
-        case "clear":
+        default:
           return (
             <TODOItem
               data={item}
@@ -57,12 +44,19 @@ export default function TODOListItemsFiltered(props: {
             />
           );
       }
-      // return <> </>
-    });
+      return undefined;
+    })
+    .filter((item) => item !== undefined);
 
   // useEffect(() => {
   //   console.log(todoList);
   // }, [todoList]);
 
-  return <div>{todoList}</div>;
+  return (
+    <div>
+      {todoList.length !== 0
+        ? todoList
+        : "No items to show for this filter selection"}
+    </div>
+  );
 }
