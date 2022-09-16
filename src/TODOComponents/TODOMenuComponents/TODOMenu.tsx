@@ -11,26 +11,25 @@ export default function TODOMenu(props: {
 }) {
   const [name, setName] = useState("");
   const [date, setDate] = useState<Date>(new Date());
-  const [id, setId] = useState<number>(Date.now());
   const [priority, setPriority] = useState<"Urgent" | "Normal" | "Low">(
     "Normal"
   );
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    let todolist: iTodo[] = [...props.todoPropsPackage.todo];
-    setId(Date.now());
     let todoObject: iTodo = {
       name,
       date,
       priority,
-      id,
+      id: Date.now(),
     };
-    todolist?.push(todoObject);
-    props.todoPropsPackage.setTodo(todolist);
+    props.todoPropsPackage.dispatch({
+      type: "ADD",
+      payload:todoObject,
+    }); 
     addToFirebase(todoObject);
-    setName("")
-  }
+    setName("");
+  };
 
   async function addToFirebase(todo: iTodo) {
     try {
@@ -49,13 +48,14 @@ export default function TODOMenu(props: {
           placeholder="name"
           className=" px-2 w-full  border border-gray-400"
           value={name}
+          aria-label="input-name-menu"
           onChange={(e) => {
             setName(e.target.value);
           }}
         ></input>
         <TODOMenuCalendar date={date} setDate={setDate} />
         <TODOTogglePriority priority={priority} setPriority={setPriority} />
-        <TODOMenuAddButton handleClick={handleClick} name={name}/>
+        <TODOMenuAddButton handleClick={handleClick} name={name} />
       </fieldset>
     </form>
   );

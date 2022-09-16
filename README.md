@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# TaskManager
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+this project it's a simple CRUD application written in Test Driven Development (TDD). Utilizes React Testing-Library and Cypress for the testing as well as Cloud Firestore to save the data permanently between sessions.
+it's styled using 98.css(https://jdan.github.io/98.css/)
 
-### `npm start`
+the idea of the project is not to be groundbreaking but be a learning stepstone for concepts like testing, clean code, and extend the knowledge with react
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+the project is divided as follows:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+TODO.tsx contains a reducer that keeps the state of the todo with his own interface (iTodo[]) that allows:
+    -SET: get data from database at first render. This is actually triggered in an useEffect and then set in the dispatch at the end.
+    -ADD: add a todo to the list in TODOMenu
+    -EDITNAME: edit the name, search the todo by id in a map and return it with the modified name
+    -EDITDATE:edit the date, search the todo by id in a map and return it with the modified date
+    -EDITPRIORITY: search the todo by id in a map, then toggle between the 3 possible state with a serie if statement
+    -DELETE: filter the array by the provided id for the todo to be removed from the array
 
-### `npm test`
+dispatcher and state are passed down the line inside a wrapper object for simplicity (as i only have to declare the interface once for everything that i'm passing down and then just state that in the props when drilling down) and are given as props to TODOMenu and TODOList
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# TODOMenu
+has the components to add a NEW todo item to the list. Contains the name input, the calendar button, the priority button and the add button
 
-### `npm run build`
+# TODOList
+contains the component to filter the list and show the list as well as the logic to modify it
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# RCT
+React Testing-Library is used to test every part of the webapp from the render to the edit of the single components. the Tests folder contains five files that are test-specific 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    TODOMenu.test.jsx
+        -expects the name input on the menu to be present
+        -expects the calendar option in the menu to be present and with the date of today at render
+        -expects a priority button to be present, set at normal on first render
+        -expect a add task button to be present and initially disabled since the name input would be empty at render
+        -expect the add task button not to be disabled after inputting a value in the name field
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   TODOAdd.test.jsx
+        - adding 1 item with date of TODAY, ad default priority (Normal)
+        -adding 1 item with date of TOMORROW and different priority than default (Urgent) 
+        -adds two tasks
 
-### `npm run eject`
+    # TODOFilter.test.jsx
+        -add 3 tasks: one with the date of today, one with the date of 2 days from today, one with the date of two weeks from now. then will filter for "today",  "week" and "clear". Expects one to be found once in day/week filter, two in week filter, three in clear filter
+        -add one with the date of +8 from today: the today and this Week filter should return nothing 
+    
+    # TODOListModify.test.jsx
+        -add one, then MODIFY THE NAME
+        -add one, then MODIFY THE DATE
+        -add one, then MODIFIES THE PRIORITY
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    # TODORemove.test.jsx
+        -add one, then remove from the list
+        -add two, then remove two from the list
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Cypress
+is currently used less at this stage, but it will mimick the same amount of testing from RTL in the future
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    # TODO.cy.jsx
+        -mounts
+        -contains the menu items
+        -when clicking the priority button, it will change from Normal to Urgent
+        -when adding a name, the addButton is not disabled anymore
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## How to run the code
+ 
+ ```bash
+gh repo clone snt85c/ReactTesting
+```
 
-## Learn More
+install project repositories 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+ ```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+run
 
-### Code Splitting
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+open http://localhost/3000 with your browser to see the site
 
-### Analyzing the Bundle Size
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[MIT](https://choosealicense.com/licenses/mit/)

@@ -6,6 +6,7 @@ import TODOName from "./TODOName";
 import "react-calendar/dist/Calendar.css";
 import TODOListCalendar from "./TODOListCalendar";
 import TODOItemPriority from "./TODOItemPriority";
+import TODOListDelete from "./TODOListDelete";
 
 export default function TODOItem(props: {
   data: iTodo;
@@ -16,69 +17,44 @@ export default function TODOItem(props: {
   const [date, setDate] = useState(props.data.date);
 
   const handleEditCalendar = async () => {
-    const temp = props.todoPropsPackage.todo.map((item) => {
-      if (item.id === props.data.id) {
-        props.data.date = date;
-        return item;
-      }
-      return item;
+    props.todoPropsPackage.dispatch({
+      type: "EDITDATE",
+      id: props.data.id,
+      newDate: date,
     });
-    props.todoPropsPackage.setTodo(temp);
     await updateDoc(doc(db, "users", props.data.id.toString()), {
       ...props.data,
       date: date,
     });
-    console.log(props.data.id, " => date has changed");
-
     setIsCalendarOpen(false);
   };
 
   const handleEditName = async (newName: string) => {
-    const temp = props.todoPropsPackage.todo.map((item) => {
-      if (item.id === props.data.id) {
-        props.data.name = newName; /*? newName : "empty";*/
-        return item;
-      }
-      return item;
+    props.todoPropsPackage.dispatch({
+      type: "EDITNAME",
+      payload: newName,
+      id: props.data.id,
     });
-    props.todoPropsPackage.setTodo(temp);
-
     await updateDoc(doc(db, "users", props.data.id.toString()), {
       ...props.data,
       name: newName ? newName : "empty",
     });
-    console.log(props.data.id, " => name has changed");
     setIsEditName(false);
   };
 
   const handleDelete = async () => {
-    const tempTodoList = props.todoPropsPackage.todo.filter((item) => {
-      return item.id !== props.data.id;
-    });
-    props.todoPropsPackage.setTodo(tempTodoList);
+    props.todoPropsPackage.dispatch({ type: "DELETE", payload: props.data.id });
     await deleteDoc(doc(db, "users", props.data.id.toString()));
-    console.log(props.data.id, " => has been deleted");
   };
 
   const handlePriority = async () => {
-    const temp: iTodo[] = props.todoPropsPackage.todo.map((item) => {
-      if (item.id === props.data.id) {
-        if (item.priority === "Normal") {
-          item.priority = "Urgent";
-        } else if (item.priority === "Urgent") {
-          item.priority = "Low";
-        } else if (item.priority === "Low") {
-          item.priority = "Normal";
-        }
-        return item;
-      }
-      return item;
+    props.todoPropsPackage.dispatch({
+      type: "EDITPRIORITY",
+      id: props.data.id,
     });
-    props.todoPropsPackage.setTodo(temp);
     await updateDoc(doc(db, "users", props.data.id.toString()), {
       ...props.data,
     });
-    console.log(props.data.id, " => priority has changed");
   };
 
   const editNamePropsPackage = {
@@ -107,17 +83,10 @@ export default function TODOItem(props: {
               handlePriority={handlePriority}
               priority={props.data.priority}
             />
-            <button
-              aria-label="button-list-delete"
-              data-testid="deleteSpan"
-              className="cursor-pointer flex justify-center items-center hover:text-red-700 duration-300"
-              onClick={handleDelete}
-            >
-              delete
-            </button>
+            <TODOListDelete handleDelete={handleDelete} />
           </div>
         </div>
-        </div>
+      </div>
     </>
   );
 }

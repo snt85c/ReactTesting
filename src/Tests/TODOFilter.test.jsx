@@ -48,7 +48,7 @@ describe("TODO FILTERING test bundle", () => {
     );
     userEvent.click(
       screen.getByRole("button", {
-        name: /add task/i,
+        name: "button-add-menu",
       })
     );
 
@@ -60,14 +60,14 @@ describe("TODO FILTERING test bundle", () => {
     );
     userEvent.click(
       screen.getByRole("button", {
-        name: "date: " + new Date().toLocaleDateString(),
+        name: "button-calendar-menu",
       })
     );
     userEvent.click(screen.getByRole("button", { name: inTwoDaysToString }));
     userEvent.click(screen.getByRole("button", { name: "Confirm" }));
     userEvent.click(
       screen.getByRole("button", {
-        name: /add task/i,
+        name: "button-add-menu",
       })
     );
 
@@ -80,14 +80,14 @@ describe("TODO FILTERING test bundle", () => {
     //get the button as '"date: " + inTwoDays.toLocaleDateString()' since the button will keep the label with the last date used
     userEvent.click(
       screen.getByRole("button", {
-        name: "date: " + inTwoDays.toLocaleDateString(),
+        name: "button-calendar-menu",
       })
     );
     userEvent.click(screen.getByRole("button", { name: eightDaysToString }));
     userEvent.click(screen.getByRole("button", { name: "Confirm" }));
     userEvent.click(
       screen.getByRole("button", {
-        name: /add task/i,
+        name: "button-add-menu",
       })
     );
 
@@ -119,7 +119,7 @@ describe("TODO FILTERING test bundle", () => {
 
     userEvent.click(
       screen.getByRole("button", {
-        name: "date: " + new Date().toLocaleDateString(),
+        name: "button-calendar-menu",
       })
     );
 
@@ -127,7 +127,7 @@ describe("TODO FILTERING test bundle", () => {
     userEvent.click(screen.getByRole("button", { name: "Confirm" }));
     userEvent.click(
       screen.getByRole("button", {
-        name: /add task/i,
+        name: "button-add-menu",
       })
     );
     userEvent.clear(menuInput);

@@ -21,7 +21,7 @@ export default function TODOListCalendar(props: {
           drag
           dragMomentum={false}
           ref={ref}
-          className="flex flex-col  border absolute window gap-1 "
+          className="flex flex-col  border absolute top-10 window gap-1 "
         >
           <div className="title-bar">
             <span className="title-bar-text pl-1 w-full">Set a new date</span>
@@ -56,7 +56,8 @@ export default function TODOListCalendar(props: {
         <input
           type="text"
           aria-label="input-list-date"
-          defaultValue={props.calendarPropsPackage.value?.toLocaleDateString()}
+          value={props.calendarPropsPackage.value.toLocaleDateString()}
+          onChange={()=>{}}
         />
         <span className="text-red-700">
           <span className="ml-2">

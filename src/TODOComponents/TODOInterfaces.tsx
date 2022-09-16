@@ -7,7 +7,8 @@ export interface iTodo {
   
   export interface iTodoPropsPackage {
     todo: iTodo[];
-    setTodo: React.Dispatch<React.SetStateAction<iTodo[]>>;
+    // setTodo: React.Dispatch<React.SetStateAction<iTodo[]>>;
+    dispatch: React.Dispatch<any>
   }
 
   export interface iEditNamePropsPackage{

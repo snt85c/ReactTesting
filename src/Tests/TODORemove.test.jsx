@@ -15,7 +15,7 @@ import {
       //get the minimum necessary dom components for the menu to change and click
       const TODOMenuNameInput = screen.getByPlaceholderText(/name/i);
       const TODOMenuAddButton = screen.getByRole("button", {
-        name: /add task/i,
+        name: "button-add-menu",
       });
   
       //fire events, add a value 'deletion test' to the input, then click 'add task'
@@ -51,7 +51,7 @@ import {
       //get the minimum necessary dom components for the menu to change and click
       const TODOMenuNameInput = screen.getByPlaceholderText(/name/i);
       const TODOMenuAddButton = screen.getByRole("button", {
-        name: /add task/i,
+        name: "button-add-menu",
       });
   
       //fire events twice , add a value 'deletion test 1' and 'deletion test 2' to the input, then click 'add task'

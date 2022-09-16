@@ -2,26 +2,47 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import TODO from "../TODOComponents/TODO";
 
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const tomorrowToString =
+      monthNames[tomorrow.getMonth()] +
+      " " +
+      tomorrow.getDate() +
+      ", " +
+      tomorrow.getFullYear();
+
 describe("TODO ADD TEST BUNDLE", () => {
-  it("add a taks  with name 'test', date of today, and priority 'Urgent' ", async () => {
+  it("add a taks  with name 'testADD', date of today, and priority 'Normal' ", async () => {
     render(<TODO />);
     //set the constant data that is passed to the menu and is expected to be found on the list of todos
     const EXPECTED_INPUT = "test ADD";
-    const EXPECTED_PRIORITY = "Urgent";
+    const EXPECTED_PRIORITY = "Normal";
     const EXPECTED_DATE = new Date().toLocaleDateString();
 
     //get all the dom components for the menu
     const TODOMenuNameInput = screen.getByPlaceholderText(/name/i);
-    const TODOMenuPriorityButton = screen.getByRole("button", {
-      name: /priority: normal/i,
-    });
     const TODOMenuAddButton = screen.getByRole("button", {
-      name: /add task/i,
+      name: "button-add-menu",
     });
 
-    //fire events, add a value 'test' to the input, click once to the priority button to toggle it to 'Urgent', then click 'add task'
+    //fire events, add a value 'test' to the input then click 'add task'
     userEvent.type(TODOMenuNameInput, EXPECTED_INPUT);
-    fireEvent.click(TODOMenuPriorityButton);
     fireEvent.click(TODOMenuAddButton);
 
     //get the dom components from the TODOList, which are now rendered after
@@ -40,6 +61,50 @@ describe("TODO ADD TEST BUNDLE", () => {
     expect(TODOListDateSpan.value).toBe(EXPECTED_DATE);
   });
 
+  it("add a taks  with name 'testADDTomorrow', date of TOMORROW riority 'URGENT' ", async () => {
+    render(<TODO />);
+    //set the constant data that is passed to the menu and is expected to be found on the list of todos
+    const EXPECTED_INPUT = "testADDTomorrow";
+    const EXPECTED_PRIORITY = "Urgent";
+    const EXPECTED_DATE = tomorrow.toLocaleDateString();
+
+    //get all the dom components for the menu
+    const TODOMenuNameInput = screen.getByPlaceholderText(/name/i);
+    const TODOMenuPriorityButton = screen.getByRole("button", {
+      name: "button-priority-menu",
+    });
+    const TODOMenuAddButton = screen.getByRole("button", {
+      name: "button-add-menu",
+    });
+
+    const TODOMenuCalendarButton = screen.getByRole("button",{name:"button-calendar-menu"})
+    expect(TODOMenuCalendarButton).toBeInTheDocument()
+
+    //fire events, add a value 'test' to the input, click once to the priority button to toggle it to 'Urgent', then click 'add task'
+    userEvent.type(TODOMenuNameInput, EXPECTED_INPUT);
+    fireEvent.click(TODOMenuPriorityButton);
+    userEvent.click(TODOMenuCalendarButton)
+    userEvent.click(screen.getByRole("button", { name: tomorrowToString }));
+    userEvent.click(screen.getByRole("button", { name: "Confirm" }));
+    fireEvent.click(TODOMenuAddButton);
+
+    //get the dom components from the TODOList, which are now rendered after
+
+    const TODOListNameSpan = screen.getByRole("textbox", {
+      name: "input-name-list",
+    });
+    const TODOListPrioritySpan = screen.getByRole("button", {
+      name: "button-list-priority",
+    });
+    const TODOListDateSpan = screen.getByRole("textbox", {
+      name: "input-list-date",
+    });
+    expect(TODOListNameSpan.value).toBe(EXPECTED_INPUT);
+    expect(TODOListPrioritySpan.textContent).toBe(EXPECTED_PRIORITY);
+    expect(TODOListDateSpan.value).toBe(EXPECTED_DATE);
+  });
+
+
   it("add two todo in the list, check for lenght of the list and value of the components", () => {
     render(<TODO />);
     //expected valued of first todo
@@ -56,10 +121,10 @@ describe("TODO ADD TEST BUNDLE", () => {
     //get menu components
     const TODOMenuNameInput = screen.getByPlaceholderText(/name/i);
     const TODOMenuPriorityButton = screen.getByRole("button", {
-      name: /priority: normal/i,
+      name: "button-priority-menu",
     });
     const TODOMenuAddButton = screen.getByRole("button", {
-      name: /add task/i,
+      name: "button-add-menu",
     });
 
     //set the first todo to 'test1', 'urgent' 'date of today'

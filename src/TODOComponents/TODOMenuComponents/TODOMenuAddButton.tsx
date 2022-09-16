@@ -5,6 +5,7 @@ export default function TODOMenuAddButton(props: {
   return (
     <button
       className="px-5 py-2 font-extrabold w-full"
+      aria-label="button-add-menu"
       disabled={props.name ? false : true}
       onClick={(e) => {
         props.handleClick(e);

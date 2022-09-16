@@ -17,13 +17,13 @@ describe("TODO MENU COMPONENT TEST BUNDLE", () => {
   it("expect a priority button to be present, set at normal on first render", () => {
     render(<TODO />);
     expect(
-      screen.getByRole("button", { name: "Priority: Normal" })
+      screen.getByRole("button", { name: "button-priority-menu" })
     ).toBeInTheDocument();
   });
 
   it("expect a add task button to be present and initially disabled since the name input would be empty at render", () => {
     render(<TODO />);
-    expect(screen.getByText(/add task/i)).toBeDisabled();
+    expect(screen.getByRole("button",{name:"button-add-menu"})).toBeDisabled();
   });
 
   it("expect the add task button not to be disabled after inputting a value in the name field", () => {
@@ -31,7 +31,7 @@ describe("TODO MENU COMPONENT TEST BUNDLE", () => {
     // screen.debug()
     const expectedinput = "test input";
     const nameInput = screen.getByPlaceholderText(/name/i);
-    const addTaskButton = screen.getByRole("button", { name: /add task/i });
+    const addTaskButton = screen.getByRole("button", { name: "button-add-menu" });
     fireEvent.change(nameInput, { target: { value: expectedinput } });
     expect(addTaskButton).not.toBeDisabled();
   });

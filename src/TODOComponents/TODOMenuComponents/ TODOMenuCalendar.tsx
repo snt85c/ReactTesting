@@ -14,6 +14,7 @@ export default function TODOMenuCalendar(props: {
     <>
       <button
         className="mt-2 py-1 w-full"
+        aria-label="button-calendar-menu"
         onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
           e.preventDefault();
           setIsCalendarOpen(true);

@@ -12,7 +12,7 @@ describe("TODO MODIFY TEST BUNDLE", () => {
     userEvent.type(screen.getByPlaceholderText(/name/i), BEFORE_MODIFICATION);
     userEvent.click(
       screen.getByRole("button", {
-        name: /add task/i,
+        name: "button-add-menu",
       })
     );
 
@@ -64,7 +64,7 @@ describe("TODO MODIFY TEST BUNDLE", () => {
     userEvent.type(screen.getByPlaceholderText(/name/i), tomorrowToString);
     userEvent.click(
       screen.getByRole("button", {
-        name: /add task/i,
+        name: "button-add-menu",
       })
     );
 
@@ -95,7 +95,7 @@ describe("TODO MODIFY TEST BUNDLE", () => {
     );
     userEvent.click(
       screen.getByRole("button", {
-        name: /add task/i,
+        name: "button-add-menu",
       })
     );
 
