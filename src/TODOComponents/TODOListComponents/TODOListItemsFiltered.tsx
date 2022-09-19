@@ -48,15 +48,14 @@ export default function TODOListItemsFiltered(props: {
     })
     .filter((item) => item !== undefined);
 
-  // useEffect(() => {
-  //   console.log(todoList);
-  // }, [todoList]);
-
   return (
     <div>
       {todoList.length !== 0
         ? todoList
-        : "No items to show for this filter selection"}
+        : todoList.length !== props.todoPropsPackage.todo.length
+        ? "No items to show for this filter selection"
+        : "There are no Tasks! Add some new task first "
+}
     </div>
   );
 }

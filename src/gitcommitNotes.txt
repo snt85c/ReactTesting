@@ -1,7 +1,8 @@
-refactor from useState to useReducer
+refactor from useState to useReducer, modofied Readme.md
 
 useState has been replaced with useReducer in TODO.jsx in order to learn it. 
 
 learning outcome: it's clearly better for maanging complex states, as you can tuck any action inside the reducer itself and just pass the dispatcher around, meaning that editing a value inside the state can be done easily everywhere inside the project
 eg: dispatch({type:"ADD", payload:newObject}) can be done everywhere without having to create custom logic to add the object. i also noticed that i didn't had to create a copy by value of the state before setting it, so this semplifies the work
 
+modifies 

@@ -5,11 +5,12 @@ import { db } from "../../Firebase/Firebase";
 import TODOMenuCalendar from "./ TODOMenuCalendar";
 import { useState } from "react";
 import TODOMenuAddButton from "./TODOMenuAddButton";
+import TODOMenuNameInput from "./TODOMenuNameInput";
 
 export default function TODOMenu(props: {
   todoPropsPackage: iTodoPropsPackage;
 }) {
-  const [name, setName] = useState("");
+  const [name, setName] = useState<string>("");
   const [date, setDate] = useState<Date>(new Date());
   const [priority, setPriority] = useState<"Urgent" | "Normal" | "Low">(
     "Normal"
@@ -43,16 +44,7 @@ export default function TODOMenu(props: {
     <form>
       <fieldset className="flex flex-col justify-center sm:items-center m-2 gap-1">
         <legend>Create a new Task</legend>
-        <input
-          type="text"
-          placeholder="name"
-          className=" px-2 w-full  border border-gray-400"
-          value={name}
-          aria-label="input-name-menu"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        ></input>
+        <TODOMenuNameInput name={name} setName={setName} />
         <TODOMenuCalendar date={date} setDate={setDate} />
         <TODOTogglePriority priority={priority} setPriority={setPriority} />
         <TODOMenuAddButton handleClick={handleClick} name={name} />
