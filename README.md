@@ -28,42 +28,48 @@ has the components to add a NEW todo item to the list. Contains the name input, 
 # TODOList
 contains the component to filter the list and show the list as well as the logic to modify it
 
-# RCT
+# React Testing Library
 React Testing-Library is used to test every part of the webapp from the render to the edit of the single components. the Tests folder contains five files that are test-specific 
 
-    TODOMenu.test.jsx
-        -expects the name input on the menu to be present
-        -expects the calendar option in the menu to be present and with the date of today at render
-        -expects a priority button to be present, set at normal on first render
-        -expect a add task button to be present and initially disabled since the name input would be empty at render
-        -expect the add task button not to be disabled after inputting a value in the name field
+### TODOMenu.test.jsx
 
-   TODOAdd.test.jsx
-        - adding 1 item with date of TODAY, ad default priority (Normal)
-        -adding 1 item with date of TOMORROW and different priority than default (Urgent) 
-        -adds two tasks
+    -expects the name input on the menu to be present
+    -expects the calendar option in the menu to be present and with the date of today at render
+    -expects a priority button to be present, set at normal on first render
+    -expect a add task button to be present and initially disabled since the name input would be empty at render
+    -expect the add task button not to be disabled after inputting a value in the name field
 
-    # TODOFilter.test.jsx
-        -add 3 tasks: one with the date of today, one with the date of 2 days from today, one with the date of two weeks from now. then will filter for "today",  "week" and "clear". Expects one to be found once in day/week filter, two in week filter, three in clear filter
-        -add one with the date of +8 from today: the today and this Week filter should return nothing 
-    
-    # TODOListModify.test.jsx
-        -add one, then MODIFY THE NAME
-        -add one, then MODIFY THE DATE
-        -add one, then MODIFIES THE PRIORITY
+### TODOAdd.test.jsx
 
-    # TODORemove.test.jsx
-        -add one, then remove from the list
-        -add two, then remove two from the list
+    -adding 1 item with date of TODAY, ad default priority (Normal)
+    -adding 1 item with date of TOMORROW and different priority than default (Urgent) 
+    -adds two tasks
+
+### TODOFilter.test.jsx
+
+    -add 3 tasks: one with the date of today, one with the date of 2 days from today, one with the date of two weeks from now. then will filter for "today",  "week" and "clear". Expects one to be found once in day/week filter, two in week filter, three in clear filter
+    -add one with the date of +8 from today: the today and this Week filter should return nothing 
+
+### TODOListModify.test.jsx
+
+    -add one, then MODIFY THE NAME
+    -add one, then MODIFY THE DATE
+    -add one, then MODIFIES THE PRIORITY
+
+### TODORemove.test.jsx
+
+    -add one, then remove from the list
+    -add two, then remove two from the list
 
 ## Cypress
 is currently used less at this stage, but it will mimick the same amount of testing from RTL in the future
 
-    # TODO.cy.jsx
-        -mounts
-        -contains the menu items
-        -when clicking the priority button, it will change from Normal to Urgent
-        -when adding a name, the addButton is not disabled anymore
+### TODO.cy.jsx
+
+    -mounts
+    -contains the menu items
+    -when clicking the priority button, it will change from Normal to Urgent
+    -when adding a name, the addButton is not disabled anymore
 
 ## How to run the code
  
