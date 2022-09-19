@@ -1,4 +1,5 @@
 # TaskManager
+[![CI](https://github.com/snt85c/ReactTesting/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/snt85c/ReactTesting/actions/workflows/main.yml)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
