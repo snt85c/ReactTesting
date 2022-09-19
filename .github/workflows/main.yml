@@ -35,4 +35,4 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       - name: start testing
-        run: nmp run test 
+        run: nmp test 
