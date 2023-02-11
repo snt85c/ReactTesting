@@ -1,14 +1,18 @@
 import { iTodo } from "../Interfaces";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../Firebase/Firebase";
 import MenuCalendar from "./MenuItems/ MenuCalendar";
 import AddButton from "./MenuItems/AddButton";
 import NameInput from "./MenuItems/NameInput";
 import TogglePriority from "./MenuItems/TogglePriority";
+import { TodoContext } from "../TODOContext";
 
-export default function Menu(props: { dispatch: React.Dispatch<any> }) {
-  const { dispatch } = props;
+export default function Menu() {
+  
+  const {  dispatch } = useContext(TodoContext);
+
+
   const [name, setName] = useState<string>("");
   const [date, setDate] = useState<Date>(new Date());
   const [priority, setPriority] = useState<"Urgent" | "Normal" | "Low">(

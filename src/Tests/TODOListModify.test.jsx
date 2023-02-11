@@ -1,10 +1,15 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import TODO from "../TODOComponents/TODO";
+import { TodoContextProvider } from "../TODOComponents/TODOContext";
 
 describe("TODO MODIFY TEST BUNDLE", () => {
   it("add one, then MODIFY THE NAME", () => {
-    render(<TODO />);
+    render(
+      <TodoContextProvider>
+        <TODO />
+      </TodoContextProvider>
+    );
     const BEFORE_MODIFICATION = "modification test 1";
     const AFTER_MODIFICATION = "modification test 2";
 
@@ -33,7 +38,11 @@ describe("TODO MODIFY TEST BUNDLE", () => {
   });
 
   it("add one, then MODIFY THE DATE", async () => {
-    render(<TODO />);
+    render(
+      <TodoContextProvider>
+        <TODO />
+      </TodoContextProvider>
+    );
     const monthNames = [
       "January",
       "February",
@@ -87,7 +96,11 @@ describe("TODO MODIFY TEST BUNDLE", () => {
   });
 
   it("add one, then MODIFIES THE PRIORITY", () => {
-    render(<TODO />);
+    render(
+      <TodoContextProvider>
+        <TODO />
+      </TodoContextProvider>
+    );
     //add and click, as usual
     userEvent.type(
       screen.getByPlaceholderText(/name/i),

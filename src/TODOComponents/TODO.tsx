@@ -1,61 +1,14 @@
 import { collection, DocumentData, getDocs } from "firebase/firestore";
-import { useEffect, useReducer } from "react";
+import { useContext, useEffect } from "react";
 import { db } from "../Firebase/Firebase";
 import { iTodo } from "./Interfaces";
 import List from "./ListComponents/List";
 import Menu from "./MenuComponents/Menu";
 import "98.css";
+import { TodoContext } from "./TODOContext";
 
 export default function TODO() {
-  const reducer = (
-    state: iTodo[],
-    action: { type: string; id?: number; payload?: any; newDate?: Date }
-  ) => {
-    switch (action.type) {
-      case "SET":
-        return action.payload;
-      case "ADD":
-        return [...state, action.payload];
-      case "EDITNAME":
-        return state.map((item: iTodo) => {
-          if (item.id === action.id) {
-            item.name = action.payload;
-            return item;
-          }
-          return item;
-        });
-      case "EDITDATE":
-        return state.map((item: iTodo) => {
-          if (item.id === action.id) {
-            item.date = action.newDate ? action.newDate : new Date();
-            return item;
-          }
-          return item;
-        });
-      case "EDITPRIORITY":
-        return state.map((item: iTodo) => {
-          if (item.id === action.id) {
-            if (item.priority === "Normal") {
-              item.priority = "Urgent";
-            } else if (item.priority === "Urgent") {
-              item.priority = "Low";
-            } else if (item.priority === "Low") {
-              item.priority = "Normal";
-            }
-            return item;
-          }
-          return item;
-        });
-      case "DELETE":
-        return state.filter((item: iTodo) => {
-          return item.id !== action.payload;
-        });
-      default:
-        throw new Error();
-    }
-  };
-
-  const [todo, dispatch] = useReducer(reducer, []);
+  const { todo, dispatch } = useContext(TodoContext);
 
   useEffect(() => {
     //at first render, get all the todo items from firebase and set them to the list
@@ -95,8 +48,8 @@ export default function TODO() {
         </div>
       </div>
       <div className="flex flex-col md:flex-row">
-        <Menu {...{ dispatch }} />
-        <List todoPropsPackage={todoPropsPackage}/>
+        <Menu />
+        <List />
       </div>
       <div className="status-bar">
         <p className="status-bar-field">Press F1 for help</p>

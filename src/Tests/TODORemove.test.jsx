@@ -1,10 +1,15 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import TODO from "../TODOComponents/TODO";
+import { TodoContextProvider } from "../TODOComponents/TODOContext";
 
 describe("TODO REMOVE TEST BUNDLE", () => {
   it("add one, then remove from the list", () => {
-    render(<TODO />);
+    render(
+      <TodoContextProvider>
+        <TODO />
+      </TodoContextProvider>
+    );
     //set the constant data that is passed to the menu and is expected to be found on the list of todos
     const EXPECTED_INPUT = "deletion test";
 
@@ -38,7 +43,11 @@ describe("TODO REMOVE TEST BUNDLE", () => {
   });
 
   it("add two, then remove two from the list", async () => {
-    render(<TODO />);
+    render(
+      <TodoContextProvider>
+        <TODO />
+      </TodoContextProvider>
+    );
 
     const EXPECTED_INPUT1 = "deletion test 1";
     const EXPECTED_INPUT2 = "deletion test 2";

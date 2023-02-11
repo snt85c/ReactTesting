@@ -1,6 +1,7 @@
 import { getByText, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import TODO from "../TODOComponents/TODO";
+import { TodoContextProvider } from "../TODOComponents/TODOContext";
 
 const monthNames = [
   "January",
@@ -39,7 +40,11 @@ const eightDaysToString =
 
 describe("TODO FILTERING test bundle", () => {
   it("add 3, one with the date of today, one with the date of 2 days from today,  one with the date of two weeks from now. Filter for today,  week and clear. expect one to be found once in day/week filter, two in week filter, three in clear filter", async () => {
-    render(<TODO />);
+    render(
+      <TodoContextProvider>
+        <TODO />
+      </TodoContextProvider>
+    );
 
     //add and click
     userEvent.type(
@@ -111,7 +116,11 @@ describe("TODO FILTERING test bundle", () => {
   });
 
   it("add one with the date of +8 from today: the today and this Week filter should return nothing ", async () => {
-    render(<TODO />);
+    render(
+      <TodoContextProvider>
+        <TODO />
+      </TodoContextProvider>
+    );
 
     //i save the name input so that i can clear it later, otherwise when testing for the presence of an item with that name, it will find two (one on the menu, one on the list, so i will clear the menu after clicking )
     const menuInput = screen.getByPlaceholderText(/name/i);
