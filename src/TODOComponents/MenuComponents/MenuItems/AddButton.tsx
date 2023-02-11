@@ -1,5 +1,5 @@
-export default function TODOMenuAddButton(props: {
-  handleClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+export default function AddButton(props: {
+  handleClickAdd: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   name: string;
 }) {
   return (
@@ -8,7 +8,7 @@ export default function TODOMenuAddButton(props: {
       aria-label="button-add-menu"
       disabled={props.name ? false : true}
       onClick={(e) => {
-        props.handleClick(e);
+        props.handleClickAdd(e);
       }}
     >
       Add Task

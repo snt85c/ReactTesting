@@ -1,18 +1,14 @@
 import { motion } from "framer-motion";
 import { Calendar } from "react-calendar";
-import { HandleClickOutsideComponent } from "../HandleClickOutsideComponent";
-import { iCalendarPropsPackage } from "../TODOInterfaces";
+import { HandleClickOutsideComponent } from "../../HandleClickOutsideComponent";
+import { iCalendarPropsPackage } from "../../Interfaces";
 
-export default function TODOListCalendar(props: {
+export default function ListItemICalendar(props: {
   calendarPropsPackage: iCalendarPropsPackage;
 }) {
   const { ref } = HandleClickOutsideComponent(
     props.calendarPropsPackage.setIsCalendarOpen
   );
-
-  // console.log(props.calendarPropsPackage.value , new Date(), "day",props.calendarPropsPackage.value )
-  // console.log(props.calendarPropsPackage.value.getMonth(),  new Date().getMonth(), "month")
-  // const dragControls = useDragControls();
 
   return (
     <>

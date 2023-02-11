@@ -1,4 +1,4 @@
-export default function TODOListFilterSelector(props: {
+export default function FilterSelector(props: {
   setFilter: React.Dispatch<
     React.SetStateAction<"Today" | "this Week" | "clear">
   >;

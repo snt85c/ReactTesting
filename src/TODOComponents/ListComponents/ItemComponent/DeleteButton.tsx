@@ -1,4 +1,4 @@
-export default function TODOListDelete(props:{handleDelete: () => Promise<void>}) {
+export default function DeleteButton(props:{handleDelete: () => Promise<void>}) {
   return (
     <button
       aria-label="button-list-delete"

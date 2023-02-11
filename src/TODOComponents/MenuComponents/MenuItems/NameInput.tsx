@@ -1,4 +1,7 @@
-export default function TODOMenuNameInput(props:{name:string, setName: React.Dispatch<React.SetStateAction<string>>}) {
+export default function NameInput(props: {
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+}) {
   return (
     <input
       type="text"

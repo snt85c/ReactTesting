@@ -1,0 +1,7 @@
+2023 REFACTOR
+
+fix issue with react not updating correctly the list of items on screen when a new one is created, this was due to the fact that the key of the component was the index of the map function instead of an unique key, this was resolved by adding uuiqd4(). Previously the key was a number between 0 and the lenght of the array of items, so react couldn't refresh the page in the correct way
+
+folders and components have been refactored to be easier to understand
+
+telegramAlerter has been changed to send an alert only when outside of development mode

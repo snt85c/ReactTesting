@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { iTodo, iTodoPropsPackage } from "../TODOInterfaces";
-import TODOItem from "./TODOItem";
+import { iTodo, iTodoPropsPackage } from "../Interfaces";
+import TODOItem from "./ListItem";
+import { v4 as uuidv4 } from "uuid";
 
-export default function TODOListItemsFiltered(props: {
+export default function FilteredList(props: {
   todoPropsPackage: iTodoPropsPackage;
   filter: "Today" | "this Week" | "clear";
 }) {
@@ -11,14 +11,14 @@ export default function TODOListItemsFiltered(props: {
     .sort((a: iTodo, b: iTodo): number => {
       return a.date.getDate() - b.date.getDate();
     })
-    .map((item, i) => {
+    .map((item) => {
       switch (props.filter) {
         case "Today":
           if (item.date.getDate() === today.getDate()) {
             return (
               <TODOItem
                 data={item}
-                key={i}
+                key={uuidv4()}
                 todoPropsPackage={props.todoPropsPackage}
               />
             );
@@ -29,7 +29,7 @@ export default function TODOListItemsFiltered(props: {
             return (
               <TODOItem
                 data={item}
-                key={i}
+                key={uuidv4()}
                 todoPropsPackage={props.todoPropsPackage}
               />
             );
@@ -39,7 +39,7 @@ export default function TODOListItemsFiltered(props: {
           return (
             <TODOItem
               data={item}
-              key={i}
+              key={uuidv4()}
               todoPropsPackage={props.todoPropsPackage}
             />
           );
@@ -54,8 +54,7 @@ export default function TODOListItemsFiltered(props: {
         ? todoList
         : todoList.length !== props.todoPropsPackage.todo.length
         ? "No items to show for this filter selection"
-        : "There are no Tasks! Add some new task first "
-}
+        : "There are no Tasks! Add some new task first "}
     </div>
   );
 }

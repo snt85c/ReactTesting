@@ -1,14 +1,14 @@
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "../../Firebase/Firebase";
-import { iTodo, iTodoPropsPackage } from "../TODOInterfaces";
-import TODOName from "./TODOName";
+import { iTodo, iTodoPropsPackage } from "../Interfaces";
 import "react-calendar/dist/Calendar.css";
-import TODOListCalendar from "./TODOListCalendar";
-import TODOItemPriority from "./TODOItemPriority";
-import TODOListDelete from "./TODOListDelete";
+import ItemCalendar from "./ItemComponent/ItemCalendar";
+import DeleteButton from "./ItemComponent/DeleteButton";
+import ItemPriorityButton from "./ItemComponent/ItemPriorityButton";
+import ItemNameInput from "./ItemComponent/ItemNameInput";
 
-export default function TODOItem(props: {
+export default function ListItem(props: {
   data: iTodo;
   todoPropsPackage: iTodoPropsPackage;
 }) {
@@ -75,15 +75,15 @@ export default function TODOItem(props: {
   return (
     <>
       <div className="flex flex-col  mx-2 my-1 justify-around">
-        <TODOName editNamePropsPackage={editNamePropsPackage} />
+        <ItemNameInput editNamePropsPackage={editNamePropsPackage} />
         <div className="flex flex-col sm:flex-row justify-between gap-1">
-          <TODOListCalendar calendarPropsPackage={calendarPropsPackage} />
+          <ItemCalendar calendarPropsPackage={calendarPropsPackage} />
           <div className="flex flex-row justify-end">
-            <TODOItemPriority
+            <ItemPriorityButton
               handlePriority={handlePriority}
               priority={props.data.priority}
             />
-            <TODOListDelete handleDelete={handleDelete} />
+            <DeleteButton handleDelete={handleDelete} />
           </div>
         </div>
       </div>

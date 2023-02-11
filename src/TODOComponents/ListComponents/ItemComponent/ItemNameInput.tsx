@@ -1,6 +1,6 @@
-import { iEditNamePropsPackage } from "../TODOInterfaces";
+import { iEditNamePropsPackage } from "../../Interfaces";
 
-export default function TODOName(props: {
+export default function ItemNameInput(props: {
   editNamePropsPackage: iEditNamePropsPackage;
 }) {
   return (

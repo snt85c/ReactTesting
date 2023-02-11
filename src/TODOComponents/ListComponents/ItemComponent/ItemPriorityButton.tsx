@@ -1,4 +1,4 @@
-export default function TODOItemPriority(props: {
+export default function ItemPriorityButton(props: {
   handlePriority: () => Promise<void>;
   priority: "Urgent" | "Normal" | "Low";
 }) {
