@@ -1,5 +1,3 @@
-BUGFIX: fix expired date
+BUGFIX: unfocused input list items
 
-old system would just compare if the date (just by the day) with a new date object (just the day) and if this is less than the previous, resulting that an amonut far in time might be less thatn the previous date, resulting in an expired data warning. this has been resolved by removing getDate() from both comparison, now it compares the full data.
-
-there might be an issue where if i set the data of a couple of years from now i might get it back tomorrow with the current year: i checked the database and the year is set correctly, so i will need to check again
+the input in listItem (where i change the name of the todo once set) was unfocusing each time i was typing a letter, this is because the state was set outside of it. to fix this, the input now stores data in a useState inside the component on change, when he loses the focus he will trigger the handleChange (this happens when the user clicks away from it) 
