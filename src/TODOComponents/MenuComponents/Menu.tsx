@@ -12,7 +12,6 @@ export default function Menu() {
   
   const {  dispatch } = useContext(TodoContext);
 
-
   const [name, setName] = useState<string>("");
   const [date, setDate] = useState<Date>(new Date());
   const [priority, setPriority] = useState<"Urgent" | "Normal" | "Low">(

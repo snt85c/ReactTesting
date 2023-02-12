@@ -18,6 +18,7 @@ export default function TODO() {
       docSnap.forEach((doc) => {
         const temp = doc.data() as DocumentData;
         const dataconverted: Date = temp.date.toDate();
+        console.log(dataconverted)
         tempTodoArray.push({ ...doc.data(), date: dataconverted } as iTodo);
       });
       dispatch({ type: "SET", payload: tempTodoArray });

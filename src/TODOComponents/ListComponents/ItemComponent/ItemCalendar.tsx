@@ -53,14 +53,11 @@ export default function ListItemICalendar(props: {
           type="text"
           aria-label="input-list-date"
           value={props.calendarPropsPackage.value.toLocaleDateString()}
-          onChange={()=>{}}
+          onChange={() => {}}
         />
         <span className="text-red-700">
           <span className="ml-2">
-            {props.calendarPropsPackage.value.getDate() + 1 <
-            new Date().getDate() + 1
-              ? "  expired"
-              : ""}
+            {props.calendarPropsPackage.value < new Date() ? "  expired" : ""}
           </span>
         </span>
       </div>
