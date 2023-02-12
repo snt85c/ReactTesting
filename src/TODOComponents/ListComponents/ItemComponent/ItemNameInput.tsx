@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { iEditNamePropsPackage } from "../../Interfaces";
 
 export default function ItemNameInput(props: {
@@ -12,8 +12,9 @@ export default function ItemNameInput(props: {
 
   //The onBlur event handler is called when focus has left the element
   const handleBlur = () => {
-    props.editNamePropsPackage.handleEditName(inputValue);
+    props.editNamePropsPackage.handleEditName(inputValue.trim());
   };
+
 
   return (
     <div className="flex  items-center flex-1">

@@ -1,3 +1,5 @@
-BUGFIX: unfocused input list items
+FEATURE: adds Notepad in background
 
-the input in listItem (where i change the name of the todo once set) was unfocusing each time i was typing a letter, this is because the state was set outside of it. to fix this, the input now stores data in a useState inside the component on change, when he loses the focus he will trigger the handleChange (this happens when the user clicks away from it) 
+to gap the lack of content (being a simple program) i added a notepad window that on default is set under the main application and can be clicked to be brought up. this resmble a notepad from window98 and has all the descriptions of what the app is supposed to
+
+add more content to readme.md

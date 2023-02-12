@@ -8,7 +8,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 this project it's a simple CRUD application written in Test Driven Development (TDD). Utilizes React Testing-Library and Cypress for the testing as well as Cloud Firestore to save the data permanently between sessions.
 it's styled using 98.css(https://jdan.github.io/98.css/)
 
-the idea of the project is not to be groundbreaking but be a learning stepstone for concepts like testing, clean code, and extend the knowledge with react
+![alt text](readmeimg.png)
+
+The idea of the project is not to be groundbreaking but be a learning stepstone for concepts like testing, clean code, and extend the knowledge with React and React Testing Library
 
 the project is divided as follows:
 
@@ -22,10 +24,10 @@ TODO.tsx contains a reducer that keeps the state of the todo with his own interf
 
 dispatcher and state are passed down the line inside a wrapper object for simplicity (as i only have to declare the interface once for everything that i'm passing down and then just state that in the props when drilling down) and are given as props to TODOMenu and TODOList
 
-# TODOMenu
+## TODOMenu
 has the components to add a NEW todo item to the list. Contains the name input, the calendar button, the priority button and the add button
 
-# TODOList
+## TODOList
 contains the component to filter the list and show the list as well as the logic to modify it
 
 # React Testing Library
